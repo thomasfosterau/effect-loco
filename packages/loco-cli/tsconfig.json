@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json.schemastore.org/tsconfig",
+  "extends": "../../tsconfig.base.json",
+  "include": [
+    "src"
+  ],
+  "references": [
+    {
+      "path": "../loco"
+    },
+    {
+      "path": "../codegen"
+    }
+  ],
+  "compilerOptions": {
+    "types": [
+      "node"
+    ]
+  }
+}
