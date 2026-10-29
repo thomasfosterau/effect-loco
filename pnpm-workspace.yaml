@@ -1,0 +1,4 @@
+packages:
+  - packages/codegen/*
+  - packages/loco/*
+  - examples/*

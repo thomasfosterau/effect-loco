@@ -1,0 +1,39 @@
+{
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "clean": "node scripts/clean.mjs",
+    "build": "tsc -b tsconfig.packages.json && pnpm --recursive --parallel --filter \"./packages/**/*\" run build",
+    "check": "tsc -b tsconfig.json",
+    "check-recursive": "pnpm --recursive --filter \"./packages/**/*\" exec tsc -b tsconfig.json",
+    "test": "vitest",
+    "coverage": "vitest --coverage",
+    "lint": "oxlint -f unix && dprint check",
+    "lint-fix": "oxlint --fix && dprint fmt",
+    "changeset-version": "changeset version",
+    "changeset-publish": "pnpm build && changeset publish"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.28.6",
+    "@babel/core": "^7.29.0",
+    "@changesets/changelog-github": "^1.0.1",
+    "@changesets/cli": "^3.0.3",
+    "@dprint/json": "^0.25.2",
+    "@dprint/markdown": "^0.28.2",
+    "@dprint/typescript": "^0.96.1",
+    "@effect/language-service": "^0.87.5",
+    "@effect/vitest": "^4.0.7",
+    "@types/node": "^26.6.6",
+    "@vitest/coverage-v8": "5.0.5",
+    "babel-plugin-annotate-pure-calls": "^0.5.0",
+    "dprint": "^0.64.3",
+    "effect": "^4.0.7",
+    "oxlint": "^1.90.0",
+    "typescript": "^7.0.2",
+    "vitest": "5.0.5"
+  },
+  "packageManager": "pnpm@10.28.0",
+  "engines": {
+    "node": ">=22"
+  }
+}
