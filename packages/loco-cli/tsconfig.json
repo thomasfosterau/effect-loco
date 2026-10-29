@@ -6,7 +6,15 @@
   ],
   "references": [
     {
-      "path": "../effect-loco"
+      "path": "../loco"
+    },
+    {
+      "path": "../codegen"
     }
-  ]
+  ],
+  "compilerOptions": {
+    "types": [
+      "node"
+    ]
+  }
 }

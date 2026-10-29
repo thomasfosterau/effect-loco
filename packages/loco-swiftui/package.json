@@ -1,14 +1,14 @@
 {
-  "name": "@thomasfosterau/effect-codegen-swift",
+  "name": "@thomasfosterau/effect-loco-swiftui",
   "version": "0.0.0",
-  "description": "An Effect-based Swift AST and printer for code generation.",
+  "description": "effect-loco target that emits SwiftUI views.",
   "bugs": {
     "url": "https://github.com/thomasfosterau/effect-loco/issues"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/thomasfosterau/effect-loco.git",
-    "directory": "packages/effect-codegen-swift"
+    "directory": "packages/loco-swiftui"
   },
   "license": "MIT",
   "sideEffects": [],
@@ -35,7 +35,9 @@
     "coverage": "vitest --coverage"
   },
   "dependencies": {
-    "@thomasfosterau/effect-codegen": "workspace:^"
+    "@thomasfosterau/effect-codegen": "workspace:^",
+    "@thomasfosterau/effect-codegen-swift": "workspace:^",
+    "@thomasfosterau/effect-loco": "workspace:^"
   },
   "devDependencies": {
     "effect": "^4.0.7"

@@ -1,14 +1,14 @@
 {
-  "name": "@thomasfosterau/effect-loco-svelte",
+  "name": "@thomasfosterau/effect-codegen-typescript",
   "version": "0.0.0",
-  "description": "effect-loco target that emits Svelte components.",
+  "description": "An Effect-based TypeScript/JavaScript AST and printer for code generation (including JSX/TSX).",
   "bugs": {
     "url": "https://github.com/thomasfosterau/effect-loco/issues"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/thomasfosterau/effect-loco.git",
-    "directory": "packages/effect-loco-svelte"
+    "directory": "packages/codegen-typescript"
   },
   "license": "MIT",
   "sideEffects": [],
@@ -35,9 +35,7 @@
     "coverage": "vitest --coverage"
   },
   "dependencies": {
-    "@thomasfosterau/effect-codegen": "workspace:^",
-    "@thomasfosterau/effect-codegen-typescript": "workspace:^",
-    "@thomasfosterau/effect-loco": "workspace:^"
+    "@thomasfosterau/effect-codegen": "workspace:^"
   },
   "devDependencies": {
     "effect": "^4.0.7"

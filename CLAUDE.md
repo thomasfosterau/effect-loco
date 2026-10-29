@@ -4,13 +4,13 @@ Write UI components once with Effect, compile them to many UI frameworks. See `R
 
 ## Layout
 
-- `packages/effect-loco` (`@thomasfosterau/effect-loco`): component DSL, IR (`Schema`-defined, serialisable) and the
+- `packages/loco` (`@thomasfosterau/effect-loco`): component DSL, IR (`Schema`-defined, serialisable) and the
   `Target` interface that framework packages implement.
-- `packages/effect-loco-cli` (`@thomasfosterau/effect-loco-cli`): the `loco` binary; loads config and component modules, runs
+- `packages/loco-cli` (`@thomasfosterau/effect-loco-cli`): the `loco` binary; loads config and component modules, runs
   targets, writes files.
-- `packages/effect-loco-<framework>`: one package per UI framework. Maps IR to a language AST from a codegen package.
-- `packages/effect-codegen` (`@thomasfosterau/effect-codegen`): language-agnostic printing and file emission.
-- `packages/effect-codegen-<language>` (`@thomasfosterau/effect-codegen-<language>`): a language AST and printer. These
+- `packages/loco-<framework>`: one package per UI framework. Maps IR to a language AST from a codegen package.
+- `packages/codegen` (`@thomasfosterau/effect-codegen`): language-agnostic printing and file emission.
+- `packages/codegen-<language>` (`@thomasfosterau/effect-codegen-<language>`): a language AST and printer. These
   packages must stay generic: they must never depend on or mention effect-loco.
 
 ## Design rules

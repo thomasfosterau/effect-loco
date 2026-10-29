@@ -1,14 +1,14 @@
 {
-  "name": "@thomasfosterau/effect-loco-compose",
+  "name": "@thomasfosterau/effect-loco-react",
   "version": "0.0.0",
-  "description": "effect-loco target that emits Jetpack Compose composables.",
+  "description": "effect-loco target that emits React components.",
   "bugs": {
     "url": "https://github.com/thomasfosterau/effect-loco/issues"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/thomasfosterau/effect-loco.git",
-    "directory": "packages/effect-loco-compose"
+    "directory": "packages/loco-react"
   },
   "license": "MIT",
   "sideEffects": [],
@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@thomasfosterau/effect-codegen": "workspace:^",
-    "@thomasfosterau/effect-codegen-kotlin": "workspace:^",
+    "@thomasfosterau/effect-codegen-typescript": "workspace:^",
     "@thomasfosterau/effect-loco": "workspace:^"
   },
   "devDependencies": {

@@ -3,16 +3,16 @@
   "extends": "./tsconfig.base.json",
   "include": [],
   "references": [
-    { "path": "packages/effect-codegen" },
-    { "path": "packages/effect-codegen-typescript" },
-    { "path": "packages/effect-codegen-swift" },
-    { "path": "packages/effect-codegen-kotlin" },
-    { "path": "packages/effect-loco" },
-    { "path": "packages/effect-loco-cli" },
-    { "path": "packages/effect-loco-react" },
-    { "path": "packages/effect-loco-svelte" },
-    { "path": "packages/effect-loco-swiftui" },
-    { "path": "packages/effect-loco-uikit" },
-    { "path": "packages/effect-loco-compose" }
+    { "path": "packages/codegen" },
+    { "path": "packages/codegen-typescript" },
+    { "path": "packages/codegen-swift" },
+    { "path": "packages/codegen-kotlin" },
+    { "path": "packages/loco" },
+    { "path": "packages/loco-cli" },
+    { "path": "packages/loco-react" },
+    { "path": "packages/loco-svelte" },
+    { "path": "packages/loco-swiftui" },
+    { "path": "packages/loco-uikit" },
+    { "path": "packages/loco-compose" }
   ]
 }
