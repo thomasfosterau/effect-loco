@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json.schemastore.org/tsconfig",
+  "extends": "../../../tsconfig.base.json",
+  "include": [
+    "src"
+  ],
+  "references": [
+    {
+      "path": "../core"
+    },
+    {
+      "path": "../../codegen/core"
+    }
+  ],
+  "compilerOptions": {
+    "types": [
+      "node"
+    ]
+  }
+}
