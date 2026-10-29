@@ -60,13 +60,13 @@ importers:
         specifier: 5.0.5
         version: 5.0.5(@types/node@26.6.6)(@vitest/coverage-v8@5.0.5)(vite@8.3.5(@types/node@26.6.6)(yaml@2.9.1))
 
-  packages/codegen/core:
+  packages/effect-codegen:
     devDependencies:
       effect:
         specifier: ^4.0.7
         version: 4.0.7
 
-  packages/codegen/kotlin:
+  packages/effect-codegen-kotlin:
     dependencies:
       '@thomasfosterau/effect-codegen':
         specifier: workspace:^
@@ -76,7 +76,7 @@ importers:
         specifier: ^4.0.7
         version: 4.0.7
 
-  packages/codegen/swift:
+  packages/effect-codegen-swift:
     dependencies:
       '@thomasfosterau/effect-codegen':
         specifier: workspace:^
@@ -86,7 +86,7 @@ importers:
         specifier: ^4.0.7
         version: 4.0.7
 
-  packages/codegen/typescript:
+  packages/effect-codegen-typescript:
     dependencies:
       '@thomasfosterau/effect-codegen':
         specifier: workspace:^
@@ -96,7 +96,7 @@ importers:
         specifier: ^4.0.7
         version: 4.0.7
 
-  packages/loco/cli:
+  packages/effect-loco-cli:
     dependencies:
       '@effect/platform-node':
         specifier: ^4.0.7
@@ -112,7 +112,7 @@ importers:
         specifier: ^4.0.7
         version: 4.0.7
 
-  packages/loco/compose:
+  packages/effect-loco-compose:
     dependencies:
       '@thomasfosterau/effect-codegen':
         specifier: workspace:^
@@ -128,13 +128,13 @@ importers:
         specifier: ^4.0.7
         version: 4.0.7
 
-  packages/loco/core:
+  packages/effect-loco:
     devDependencies:
       effect:
         specifier: ^4.0.7
         version: 4.0.7
 
-  packages/loco/react:
+  packages/effect-loco-react:
     dependencies:
       '@thomasfosterau/effect-codegen':
         specifier: workspace:^
@@ -150,7 +150,7 @@ importers:
         specifier: ^4.0.7
         version: 4.0.7
 
-  packages/loco/svelte:
+  packages/effect-loco-svelte:
     dependencies:
       '@thomasfosterau/effect-codegen':
         specifier: workspace:^
@@ -166,7 +166,7 @@ importers:
         specifier: ^4.0.7
         version: 4.0.7
 
-  packages/loco/swiftui:
+  packages/effect-loco-swiftui:
     dependencies:
       '@thomasfosterau/effect-codegen':
         specifier: workspace:^
@@ -182,7 +182,7 @@ importers:
         specifier: ^4.0.7
         version: 4.0.7
 
-  packages/loco/uikit:
+  packages/effect-loco-uikit:
     dependencies:
       '@thomasfosterau/effect-codegen':
         specifier: workspace:^

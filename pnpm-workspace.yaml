@@ -1,4 +1,3 @@
 packages:
-  - packages/codegen/*
-  - packages/loco/*
+  - packages/*
   - examples/*

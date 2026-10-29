@@ -8,8 +8,8 @@
   ],
   "include": [
     "**/vitest.*.ts",
-    "./packages/*/*/test/**/*.ts",
-    "./packages/*/*/test/**/*.json",
+    "./packages/*/test/**/*.ts",
+    "./packages/*/test/**/*.json",
     "./scripts/**/*.ts"
   ],
   "exclude": [
@@ -26,70 +26,70 @@
     ],
     "paths": {
       "@thomasfosterau/effect-codegen": [
-        "./packages/codegen/core/src/index.ts"
+        "./packages/effect-codegen/src/index.ts"
       ],
       "@thomasfosterau/effect-codegen/*": [
-        "./packages/codegen/core/src/*.ts"
+        "./packages/effect-codegen/src/*.ts"
       ],
       "@thomasfosterau/effect-codegen-typescript": [
-        "./packages/codegen/typescript/src/index.ts"
+        "./packages/effect-codegen-typescript/src/index.ts"
       ],
       "@thomasfosterau/effect-codegen-typescript/*": [
-        "./packages/codegen/typescript/src/*.ts"
+        "./packages/effect-codegen-typescript/src/*.ts"
       ],
       "@thomasfosterau/effect-codegen-swift": [
-        "./packages/codegen/swift/src/index.ts"
+        "./packages/effect-codegen-swift/src/index.ts"
       ],
       "@thomasfosterau/effect-codegen-swift/*": [
-        "./packages/codegen/swift/src/*.ts"
+        "./packages/effect-codegen-swift/src/*.ts"
       ],
       "@thomasfosterau/effect-codegen-kotlin": [
-        "./packages/codegen/kotlin/src/index.ts"
+        "./packages/effect-codegen-kotlin/src/index.ts"
       ],
       "@thomasfosterau/effect-codegen-kotlin/*": [
-        "./packages/codegen/kotlin/src/*.ts"
+        "./packages/effect-codegen-kotlin/src/*.ts"
       ],
       "@thomasfosterau/effect-loco": [
-        "./packages/loco/core/src/index.ts"
+        "./packages/effect-loco/src/index.ts"
       ],
       "@thomasfosterau/effect-loco/*": [
-        "./packages/loco/core/src/*.ts"
+        "./packages/effect-loco/src/*.ts"
       ],
       "@thomasfosterau/effect-loco-cli": [
-        "./packages/loco/cli/src/index.ts"
+        "./packages/effect-loco-cli/src/index.ts"
       ],
       "@thomasfosterau/effect-loco-cli/*": [
-        "./packages/loco/cli/src/*.ts"
+        "./packages/effect-loco-cli/src/*.ts"
       ],
       "@thomasfosterau/effect-loco-react": [
-        "./packages/loco/react/src/index.ts"
+        "./packages/effect-loco-react/src/index.ts"
       ],
       "@thomasfosterau/effect-loco-react/*": [
-        "./packages/loco/react/src/*.ts"
+        "./packages/effect-loco-react/src/*.ts"
       ],
       "@thomasfosterau/effect-loco-svelte": [
-        "./packages/loco/svelte/src/index.ts"
+        "./packages/effect-loco-svelte/src/index.ts"
       ],
       "@thomasfosterau/effect-loco-svelte/*": [
-        "./packages/loco/svelte/src/*.ts"
+        "./packages/effect-loco-svelte/src/*.ts"
       ],
       "@thomasfosterau/effect-loco-swiftui": [
-        "./packages/loco/swiftui/src/index.ts"
+        "./packages/effect-loco-swiftui/src/index.ts"
       ],
       "@thomasfosterau/effect-loco-swiftui/*": [
-        "./packages/loco/swiftui/src/*.ts"
+        "./packages/effect-loco-swiftui/src/*.ts"
       ],
       "@thomasfosterau/effect-loco-uikit": [
-        "./packages/loco/uikit/src/index.ts"
+        "./packages/effect-loco-uikit/src/index.ts"
       ],
       "@thomasfosterau/effect-loco-uikit/*": [
-        "./packages/loco/uikit/src/*.ts"
+        "./packages/effect-loco-uikit/src/*.ts"
       ],
       "@thomasfosterau/effect-loco-compose": [
-        "./packages/loco/compose/src/index.ts"
+        "./packages/effect-loco-compose/src/index.ts"
       ],
       "@thomasfosterau/effect-loco-compose/*": [
-        "./packages/loco/compose/src/*.ts"
+        "./packages/effect-loco-compose/src/*.ts"
       ]
     },
     "plugins": [
