@@ -1,14 +1,14 @@
 {
-  "name": "@thomasfosterau/effect-codegen-typescript",
+  "name": "@thomasfosterau/effect-loco-compose",
   "version": "0.0.0",
-  "description": "An Effect-based TypeScript/JavaScript AST and printer for code generation (including JSX/TSX).",
+  "description": "effect-loco target that emits Jetpack Compose composables.",
   "bugs": {
     "url": "https://github.com/thomasfosterau/effect-loco/issues"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/thomasfosterau/effect-loco.git",
-    "directory": "packages/effect-codegen-typescript"
+    "directory": "packages/loco-compose"
   },
   "license": "MIT",
   "sideEffects": [],
@@ -35,7 +35,9 @@
     "coverage": "vitest --coverage"
   },
   "dependencies": {
-    "@thomasfosterau/effect-codegen": "workspace:^"
+    "@thomasfosterau/effect-codegen": "workspace:^",
+    "@thomasfosterau/effect-codegen-kotlin": "workspace:^",
+    "@thomasfosterau/effect-loco": "workspace:^"
   },
   "devDependencies": {
     "effect": "^4.0.7"

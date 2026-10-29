@@ -1,14 +1,14 @@
 {
-  "name": "@thomasfosterau/effect-codegen-kotlin",
+  "name": "@thomasfosterau/effect-loco",
   "version": "0.0.0",
-  "description": "An Effect-based Kotlin AST and printer for code generation.",
+  "description": "Write UI components once with Effect: the component DSL, intermediate representation (IR) and target interface.",
   "bugs": {
     "url": "https://github.com/thomasfosterau/effect-loco/issues"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/thomasfosterau/effect-loco.git",
-    "directory": "packages/effect-codegen-kotlin"
+    "directory": "packages/loco"
   },
   "license": "MIT",
   "sideEffects": [],
@@ -33,9 +33,6 @@
     "check": "tsc -b tsconfig.json",
     "test": "vitest",
     "coverage": "vitest --coverage"
-  },
-  "dependencies": {
-    "@thomasfosterau/effect-codegen": "workspace:^"
   },
   "devDependencies": {
     "effect": "^4.0.7"

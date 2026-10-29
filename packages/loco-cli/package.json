@@ -1,17 +1,20 @@
 {
-  "name": "@thomasfosterau/effect-loco",
+  "name": "@thomasfosterau/effect-loco-cli",
   "version": "0.0.0",
-  "description": "Write UI components once with Effect: the component DSL, intermediate representation (IR) and target interface.",
+  "description": "The effect-loco command line interface: loads component modules and emits code for configured targets.",
   "bugs": {
     "url": "https://github.com/thomasfosterau/effect-loco/issues"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/thomasfosterau/effect-loco.git",
-    "directory": "packages/effect-loco"
+    "directory": "packages/loco-cli"
   },
   "license": "MIT",
-  "sideEffects": [],
+  "sideEffects": [
+    "./src/bin.ts",
+    "./dist/bin.js"
+  ],
   "type": "module",
   "exports": {
     "./package.json": "./package.json",
@@ -19,6 +22,9 @@
     "./*": "./src/*.ts",
     "./internal/*": null,
     "./*/index": null
+  },
+  "bin": {
+    "loco": "./src/bin.ts"
   },
   "files": [
     "src/**/*.ts",
@@ -34,6 +40,11 @@
     "test": "vitest",
     "coverage": "vitest --coverage"
   },
+  "dependencies": {
+    "@effect/platform-node": "^4.0.7",
+    "@thomasfosterau/effect-codegen": "workspace:^",
+    "@thomasfosterau/effect-loco": "workspace:^"
+  },
   "devDependencies": {
     "effect": "^4.0.7"
   },
@@ -43,6 +54,9 @@
   "publishConfig": {
     "access": "public",
     "provenance": true,
+    "bin": {
+      "loco": "./dist/bin.js"
+    },
     "exports": {
       "./package.json": "./package.json",
       ".": "./dist/index.js",

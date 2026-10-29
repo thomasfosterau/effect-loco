@@ -60,139 +60,139 @@ importers:
         specifier: 5.0.5
         version: 5.0.5(@types/node@26.6.6)(@vitest/coverage-v8@5.0.5)(vite@8.3.5(@types/node@26.6.6)(yaml@2.9.1))
 
-  packages/effect-codegen:
+  packages/codegen:
     devDependencies:
       effect:
         specifier: ^4.0.7
         version: 4.0.7
 
-  packages/effect-codegen-kotlin:
+  packages/codegen-kotlin:
     dependencies:
       '@thomasfosterau/effect-codegen':
         specifier: workspace:^
-        version: link:../core
+        version: link:../codegen
     devDependencies:
       effect:
         specifier: ^4.0.7
         version: 4.0.7
 
-  packages/effect-codegen-swift:
+  packages/codegen-swift:
     dependencies:
       '@thomasfosterau/effect-codegen':
         specifier: workspace:^
-        version: link:../core
+        version: link:../codegen
     devDependencies:
       effect:
         specifier: ^4.0.7
         version: 4.0.7
 
-  packages/effect-codegen-typescript:
+  packages/codegen-typescript:
     dependencies:
       '@thomasfosterau/effect-codegen':
         specifier: workspace:^
-        version: link:../core
+        version: link:../codegen
     devDependencies:
       effect:
         specifier: ^4.0.7
         version: 4.0.7
 
-  packages/effect-loco-cli:
+  packages/loco:
+    devDependencies:
+      effect:
+        specifier: ^4.0.7
+        version: 4.0.7
+
+  packages/loco-cli:
     dependencies:
       '@effect/platform-node':
         specifier: ^4.0.7
         version: 4.0.7(effect@4.0.7)(redis@6.3.0)
       '@thomasfosterau/effect-codegen':
         specifier: workspace:^
-        version: link:../../codegen/core
+        version: link:../codegen
       '@thomasfosterau/effect-loco':
         specifier: workspace:^
-        version: link:../core
+        version: link:../loco
     devDependencies:
       effect:
         specifier: ^4.0.7
         version: 4.0.7
 
-  packages/effect-loco-compose:
+  packages/loco-compose:
     dependencies:
       '@thomasfosterau/effect-codegen':
         specifier: workspace:^
-        version: link:../../codegen/core
+        version: link:../codegen
       '@thomasfosterau/effect-codegen-kotlin':
         specifier: workspace:^
-        version: link:../../codegen/kotlin
+        version: link:../codegen-kotlin
       '@thomasfosterau/effect-loco':
         specifier: workspace:^
-        version: link:../core
+        version: link:../loco
     devDependencies:
       effect:
         specifier: ^4.0.7
         version: 4.0.7
 
-  packages/effect-loco:
-    devDependencies:
-      effect:
-        specifier: ^4.0.7
-        version: 4.0.7
-
-  packages/effect-loco-react:
+  packages/loco-react:
     dependencies:
       '@thomasfosterau/effect-codegen':
         specifier: workspace:^
-        version: link:../../codegen/core
+        version: link:../codegen
       '@thomasfosterau/effect-codegen-typescript':
         specifier: workspace:^
-        version: link:../../codegen/typescript
+        version: link:../codegen-typescript
       '@thomasfosterau/effect-loco':
         specifier: workspace:^
-        version: link:../core
+        version: link:../loco
     devDependencies:
       effect:
         specifier: ^4.0.7
         version: 4.0.7
 
-  packages/effect-loco-svelte:
+  packages/loco-svelte:
     dependencies:
       '@thomasfosterau/effect-codegen':
         specifier: workspace:^
-        version: link:../../codegen/core
+        version: link:../codegen
       '@thomasfosterau/effect-codegen-typescript':
         specifier: workspace:^
-        version: link:../../codegen/typescript
+        version: link:../codegen-typescript
       '@thomasfosterau/effect-loco':
         specifier: workspace:^
-        version: link:../core
+        version: link:../loco
     devDependencies:
       effect:
         specifier: ^4.0.7
         version: 4.0.7
 
-  packages/effect-loco-swiftui:
+  packages/loco-swiftui:
     dependencies:
       '@thomasfosterau/effect-codegen':
         specifier: workspace:^
-        version: link:../../codegen/core
+        version: link:../codegen
       '@thomasfosterau/effect-codegen-swift':
         specifier: workspace:^
-        version: link:../../codegen/swift
+        version: link:../codegen-swift
       '@thomasfosterau/effect-loco':
         specifier: workspace:^
-        version: link:../core
+        version: link:../loco
     devDependencies:
       effect:
         specifier: ^4.0.7
         version: 4.0.7
 
-  packages/effect-loco-uikit:
+  packages/loco-uikit:
     dependencies:
       '@thomasfosterau/effect-codegen':
         specifier: workspace:^
-        version: link:../../codegen/core
+        version: link:../codegen
       '@thomasfosterau/effect-codegen-swift':
         specifier: workspace:^
-        version: link:../../codegen/swift
+        version: link:../codegen-swift
       '@thomasfosterau/effect-loco':
         specifier: workspace:^
-        version: link:../core
+        version: link:../loco
     devDependencies:
       effect:
         specifier: ^4.0.7

@@ -1,14 +1,14 @@
 {
-  "name": "@thomasfosterau/effect-codegen",
+  "name": "@thomasfosterau/effect-loco-svelte",
   "version": "0.0.0",
-  "description": "Language-agnostic code generation primitives for Effect: documents, pretty-printing and file emission.",
+  "description": "effect-loco target that emits Svelte components.",
   "bugs": {
     "url": "https://github.com/thomasfosterau/effect-loco/issues"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/thomasfosterau/effect-loco.git",
-    "directory": "packages/effect-codegen"
+    "directory": "packages/loco-svelte"
   },
   "license": "MIT",
   "sideEffects": [],
@@ -33,6 +33,11 @@
     "check": "tsc -b tsconfig.json",
     "test": "vitest",
     "coverage": "vitest --coverage"
+  },
+  "dependencies": {
+    "@thomasfosterau/effect-codegen": "workspace:^",
+    "@thomasfosterau/effect-codegen-typescript": "workspace:^",
+    "@thomasfosterau/effect-loco": "workspace:^"
   },
   "devDependencies": {
     "effect": "^4.0.7"

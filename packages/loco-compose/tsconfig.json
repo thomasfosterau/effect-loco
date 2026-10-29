@@ -6,13 +6,13 @@
   ],
   "references": [
     {
-      "path": "../effect-loco"
+      "path": "../loco"
     },
     {
-      "path": "../effect-codegen"
+      "path": "../codegen"
     },
     {
-      "path": "../effect-codegen-kotlin"
+      "path": "../codegen-kotlin"
     }
   ]
 }
