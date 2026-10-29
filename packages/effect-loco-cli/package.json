@@ -1,0 +1,68 @@
+{
+  "name": "@thomasfosterau/effect-loco-cli",
+  "version": "0.0.0",
+  "description": "The effect-loco command line interface: loads component modules and emits code for configured targets.",
+  "bugs": {
+    "url": "https://github.com/thomasfosterau/effect-loco/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thomasfosterau/effect-loco.git",
+    "directory": "packages/effect-loco-cli"
+  },
+  "license": "MIT",
+  "sideEffects": [
+    "./src/bin.ts",
+    "./dist/bin.js"
+  ],
+  "type": "module",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": "./src/index.ts",
+    "./*": "./src/*.ts",
+    "./internal/*": null,
+    "./*/index": null
+  },
+  "bin": {
+    "loco": "./src/bin.ts"
+  },
+  "files": [
+    "src/**/*.ts",
+    "dist/**/*.js",
+    "dist/**/*.js.map",
+    "dist/**/*.d.ts",
+    "dist/**/*.d.ts.map"
+  ],
+  "scripts": {
+    "build": "tsc -b tsconfig.json && pnpm babel",
+    "babel": "babel dist --plugins annotate-pure-calls --out-dir dist --source-maps",
+    "check": "tsc -b tsconfig.json",
+    "test": "vitest",
+    "coverage": "vitest --coverage"
+  },
+  "dependencies": {
+    "@effect/platform-node": "^4.0.7",
+    "@thomasfosterau/effect-codegen": "workspace:^",
+    "@thomasfosterau/effect-loco": "workspace:^"
+  },
+  "devDependencies": {
+    "effect": "^4.0.7"
+  },
+  "peerDependencies": {
+    "effect": "^4.0.7"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true,
+    "bin": {
+      "loco": "./dist/bin.js"
+    },
+    "exports": {
+      "./package.json": "./package.json",
+      ".": "./dist/index.js",
+      "./*": "./dist/*.js",
+      "./internal/*": null,
+      "./*/index": null
+    }
+  }
+}

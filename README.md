@@ -28,19 +28,19 @@ code generation.
 
 ## Packages
 
-| Package                                                                    | Description                                                     |
-| -------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| [`@thomasfosterau/effect-loco`](packages/loco/core)                        | Component DSL, IR and target interface                          |
-| [`@thomasfosterau/effect-loco-cli`](packages/loco/cli)                     | The `loco` command line interface                               |
-| [`@thomasfosterau/effect-loco-react`](packages/loco/react)                 | React target                                                    |
-| [`@thomasfosterau/effect-loco-svelte`](packages/loco/svelte)               | Svelte target                                                   |
-| [`@thomasfosterau/effect-loco-swiftui`](packages/loco/swiftui)             | SwiftUI target                                                  |
-| [`@thomasfosterau/effect-loco-uikit`](packages/loco/uikit)                 | UIKit target                                                    |
-| [`@thomasfosterau/effect-loco-compose`](packages/loco/compose)             | Jetpack Compose target                                          |
-| [`@thomasfosterau/effect-codegen`](packages/codegen/core)                  | Language-agnostic codegen primitives (documents, printing, I/O) |
-| [`@thomasfosterau/effect-codegen-typescript`](packages/codegen/typescript) | TypeScript/TSX AST and printer                                  |
-| [`@thomasfosterau/effect-codegen-swift`](packages/codegen/swift)           | Swift AST and printer                                           |
-| [`@thomasfosterau/effect-codegen-kotlin`](packages/codegen/kotlin)         | Kotlin AST and printer                                          |
+| Package                                                                           | Description                                                     |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| [`@thomasfosterau/effect-loco`](packages/effect-loco)                             | Component DSL, IR and target interface                          |
+| [`@thomasfosterau/effect-loco-cli`](packages/effect-loco-cli)                     | The `loco` command line interface                               |
+| [`@thomasfosterau/effect-loco-react`](packages/effect-loco-react)                 | React target                                                    |
+| [`@thomasfosterau/effect-loco-svelte`](packages/effect-loco-svelte)               | Svelte target                                                   |
+| [`@thomasfosterau/effect-loco-swiftui`](packages/effect-loco-swiftui)             | SwiftUI target                                                  |
+| [`@thomasfosterau/effect-loco-uikit`](packages/effect-loco-uikit)                 | UIKit target                                                    |
+| [`@thomasfosterau/effect-loco-compose`](packages/effect-loco-compose)             | Jetpack Compose target                                          |
+| [`@thomasfosterau/effect-codegen`](packages/effect-codegen)                       | Language-agnostic codegen primitives (documents, printing, I/O) |
+| [`@thomasfosterau/effect-codegen-typescript`](packages/effect-codegen-typescript) | TypeScript/TSX AST and printer                                  |
+| [`@thomasfosterau/effect-codegen-swift`](packages/effect-codegen-swift)           | Swift AST and printer                                           |
+| [`@thomasfosterau/effect-codegen-kotlin`](packages/effect-codegen-kotlin)         | Kotlin AST and printer                                          |
 
 ## Development
 

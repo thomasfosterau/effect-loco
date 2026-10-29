@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json.schemastore.org/tsconfig",
+  "extends": "../../tsconfig.base.json",
+  "include": [
+    "src"
+  ],
+  "references": [
+    {
+      "path": "../effect-loco"
+    },
+    {
+      "path": "../effect-codegen"
+    },
+    {
+      "path": "../effect-codegen-kotlin"
+    }
+  ]
+}

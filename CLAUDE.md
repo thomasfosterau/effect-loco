@@ -4,13 +4,13 @@ Write UI components once with Effect, compile them to many UI frameworks. See `R
 
 ## Layout
 
-- `packages/loco/core` (`@thomasfosterau/effect-loco`): component DSL, IR (`Schema`-defined, serialisable) and the
+- `packages/effect-loco` (`@thomasfosterau/effect-loco`): component DSL, IR (`Schema`-defined, serialisable) and the
   `Target` interface that framework packages implement.
-- `packages/loco/cli` (`@thomasfosterau/effect-loco-cli`): the `loco` binary; loads config and component modules, runs
+- `packages/effect-loco-cli` (`@thomasfosterau/effect-loco-cli`): the `loco` binary; loads config and component modules, runs
   targets, writes files.
-- `packages/loco/<framework>`: one package per UI framework. Maps IR to a language AST from a codegen package.
-- `packages/codegen/core` (`@thomasfosterau/effect-codegen`): language-agnostic printing and file emission.
-- `packages/codegen/<language>` (`@thomasfosterau/effect-codegen-<language>`): a language AST and printer. These
+- `packages/effect-loco-<framework>`: one package per UI framework. Maps IR to a language AST from a codegen package.
+- `packages/effect-codegen` (`@thomasfosterau/effect-codegen`): language-agnostic printing and file emission.
+- `packages/effect-codegen-<language>` (`@thomasfosterau/effect-codegen-<language>`): a language AST and printer. These
   packages must stay generic: they must never depend on or mention effect-loco.
 
 ## Design rules
@@ -24,7 +24,7 @@ Write UI components once with Effect, compile them to many UI frameworks. See `R
 - Effect 4 (`effect@^4`). Import modules by namespace from deep paths: `import * as Effect from "effect/Effect"`.
 - ESM only, `.ts` extensions in relative imports, `erasableSyntaxOnly`.
 - Every exported symbol gets a JSDoc comment with `@since` (and `@category` where useful).
-- Tests live in `packages/*/*/test/**/*.test.ts` and use `@effect/vitest` (`it.effect` for effectful tests). Prefer
+- Tests live in `packages/*/test/**/*.test.ts` and use `@effect/vitest` (`it.effect` for effectful tests). Prefer
   snapshot tests for printers and generated output.
 - Add a changeset (`pnpm changeset`) for user-facing changes.
 
