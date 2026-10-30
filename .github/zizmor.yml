@@ -1,0 +1,14 @@
+# zizmor configuration (`uvx zizmor --offline .github`). Each exemption says
+# why the audit's default does not fit this repository.
+rules:
+  # The owner's supply-chain policy is pnpm `minimumReleaseAge: 480` (8 hours)
+  # with Dependabot's `cooldown` at 1 day, its smallest unit (see the header
+  # of dependabot.yml); zizmor's default asks for 7.
+  dependabot-cooldown:
+    config:
+      days: 1
+  # `./.github/actions/setup` is the form every sibling repository and every
+  # GitHub runner understands; the newer `$/` self-repository syntax buys
+  # nothing for a local composite action called from this repository only.
+  self-repository:
+    disable: true

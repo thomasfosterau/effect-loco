@@ -9,12 +9,6 @@ import * as NodeServices from "@effect/platform-node/NodeServices"
 import * as Command from "effect/cli/Command"
 import * as Effect from "effect/Effect"
 
-const loco = Command.make("loco").pipe(
-  Command.withDescription("Compile effect-loco components to UI framework code")
-)
+const loco = Command.make("loco").pipe(Command.withDescription("Compile effect-loco components to UI framework code"))
 
-loco.pipe(
-  Command.run({ version: "0.0.0" }),
-  Effect.provide(NodeServices.layer),
-  NodeRuntime.runMain
-)
+loco.pipe(Command.run({ version: "0.0.0" }), Effect.provide(NodeServices.layer), NodeRuntime.runMain)

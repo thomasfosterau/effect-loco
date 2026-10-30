@@ -30,12 +30,14 @@
     "skipLibCheck": true,
     "noErrorTruncation": true,
     "types": [],
-    "plugins": [{
-      "name": "@effect/language-service",
-      "namespaceImportPackages": ["effect", "@effect/*", "@thomasfosterau/*"],
-      "includeSuggestionsInTsc": false,
-      "ignoreEffectWarningsInTscExitCode": true,
-      "ignoreEffectErrorsInTscExitCode": true
-    }]
+    "plugins": [
+      {
+        "name": "@effect/language-service",
+        "namespaceImportPackages": ["effect", "@effect/*", "@thomasfosterau/*"],
+        "includeSuggestionsInTsc": false,
+        "ignoreEffectWarningsInTscExitCode": true,
+        "ignoreEffectErrorsInTscExitCode": true
+      }
+    ]
   }
 }

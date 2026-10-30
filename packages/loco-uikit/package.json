@@ -5,20 +5,11 @@
   "bugs": {
     "url": "https://github.com/thomasfosterau/effect-loco/issues"
   },
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/thomasfosterau/effect-loco.git",
     "directory": "packages/loco-uikit"
-  },
-  "license": "MIT",
-  "sideEffects": [],
-  "type": "module",
-  "exports": {
-    "./package.json": "./package.json",
-    ".": "./src/index.ts",
-    "./*": "./src/*.ts",
-    "./internal/*": null,
-    "./*/index": null
   },
   "files": [
     "src/**/*.ts",
@@ -27,12 +18,25 @@
     "dist/**/*.d.ts",
     "dist/**/*.d.ts.map"
   ],
-  "scripts": {
-    "build": "tsc -b tsconfig.json && pnpm babel",
-    "babel": "babel dist --plugins annotate-pure-calls --out-dir dist --source-maps",
-    "check": "tsc -b tsconfig.json",
-    "test": "vitest",
-    "coverage": "vitest --coverage"
+  "type": "module",
+  "sideEffects": [],
+  "exports": {
+    "./package.json": "./package.json",
+    ".": "./src/index.ts",
+    "./*": "./src/*.ts",
+    "./internal/*": null,
+    "./*/index": null
+  },
+  "publishConfig": {
+    "exports": {
+      "./package.json": "./package.json",
+      ".": "./dist/index.js",
+      "./*": "./dist/*.js",
+      "./internal/*": null,
+      "./*/index": null
+    },
+    "access": "public",
+    "provenance": true
   },
   "dependencies": {
     "@thomasfosterau/effect-codegen": "workspace:^",
@@ -40,20 +44,9 @@
     "@thomasfosterau/effect-loco": "workspace:^"
   },
   "devDependencies": {
-    "effect": "^4.0.7"
+    "effect": "catalog:"
   },
   "peerDependencies": {
-    "effect": "^4.0.7"
-  },
-  "publishConfig": {
-    "access": "public",
-    "provenance": true,
-    "exports": {
-      "./package.json": "./package.json",
-      ".": "./dist/index.js",
-      "./*": "./dist/*.js",
-      "./internal/*": null,
-      "./*/index": null
-    }
+    "effect": "catalog:peers"
   }
 }
