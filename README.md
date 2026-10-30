@@ -44,16 +44,16 @@ code generation.
 
 ## Development
 
-Requires Node.js 22+ and pnpm 10.
+Requires Node.js 22+ and pnpm 10. The toolchain is [Vite+](https://viteplus.dev) (`vp`).
 
 ```sh
-pnpm install
-pnpm check     # type-check everything (TypeScript project references)
-pnpm test      # run tests with Vitest
-pnpm lint      # oxlint + dprint
-pnpm lint-fix  # fix lint and formatting
-pnpm build     # build all packages to dist/
-pnpm changeset # describe a change for the next release
+pnpm install            # dependencies, git hooks and the Effect-patched tsc / oxlint
+vp check                # format + lint (Oxfmt + Oxlint, type-aware)
+vp run check            # type-check everything (TypeScript project references)
+vp run -r test:unit     # run every package's tests
+vp run -r build         # build all packages to dist/ (vp pack)
+vp run test:coverage    # all tests under one coverage map (read by fallow)
+pnpm changeset          # describe a change for the next release
 ```
 
 ## License

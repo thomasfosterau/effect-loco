@@ -1,0 +1,145 @@
+{
+  "$schema": "https://raw.githubusercontent.com/fallow-rs/fallow/main/schema.json",
+  "entry": ["packages/*/test/**/*.test.ts", "**/vite.config.ts", "vite.package.ts", "vitest.setup.ts"],
+  "ignorePatterns": ["**/dist/**", "**/coverage/**"],
+  "ignoreDependencies": [
+    // Workspace dependencies the package scaffolds declare ahead of the code
+    // that imports them (the v0 roadmap, #3). Remove each name once every
+    // package that lists it imports it.
+    "@thomasfosterau/effect-codegen",
+    "@thomasfosterau/effect-codegen-kotlin",
+    "@thomasfosterau/effect-codegen-swift",
+    "@thomasfosterau/effect-codegen-typescript",
+    "@thomasfosterau/effect-loco",
+    // Tooling that fallow cannot see a use of (bins run from vite.config.ts
+    // tasks and the `prepare` script, type-only packages, config plugins).
+    "@types/node",
+    "@effect/tsgo",
+    "@effect/language-service",
+    "@enfect/oxlint",
+    "@typescript/native",
+    "typescript",
+    "vite",
+    "vitest",
+    "vite-plus",
+    "@changesets/cli",
+    "@changesets/changelog-github",
+    "@vitest/coverage-istanbul",
+    "fallow"
+  ],
+  "rules": {
+    "unused-files": "error",
+    "unused-exports": "error",
+    "unused-types": "error",
+    "unused-dependencies": "error",
+    "unused-dev-dependencies": "warn",
+    "unused-enum-members": "error",
+    "unused-class-members": "warn",
+    "unresolved-imports": "error",
+    "unlisted-dependencies": "error",
+    "duplicate-exports": "error",
+    "circular-dependencies": "error",
+    "boundary-violation": "error",
+    "stale-suppressions": "warn"
+  },
+  "boundaries": {
+    "zones": [
+      {
+        "name": "codegen",
+        "patterns": ["packages/codegen/**"]
+      },
+      {
+        "name": "codegen-typescript",
+        "patterns": ["packages/codegen-typescript/**"]
+      },
+      {
+        "name": "codegen-swift",
+        "patterns": ["packages/codegen-swift/**"]
+      },
+      {
+        "name": "codegen-kotlin",
+        "patterns": ["packages/codegen-kotlin/**"]
+      },
+      {
+        "name": "loco",
+        "patterns": ["packages/loco/**"]
+      },
+      {
+        "name": "loco-cli",
+        "patterns": ["packages/loco-cli/**"]
+      },
+      {
+        "name": "loco-react",
+        "patterns": ["packages/loco-react/**"]
+      },
+      {
+        "name": "loco-svelte",
+        "patterns": ["packages/loco-svelte/**"]
+      },
+      {
+        "name": "loco-swiftui",
+        "patterns": ["packages/loco-swiftui/**"]
+      },
+      {
+        "name": "loco-uikit",
+        "patterns": ["packages/loco-uikit/**"]
+      },
+      {
+        "name": "loco-compose",
+        "patterns": ["packages/loco-compose/**"]
+      }
+    ],
+    "rules": [
+      {
+        "from": "codegen",
+        "allow": []
+      },
+      {
+        "from": "codegen-typescript",
+        "allow": ["codegen"]
+      },
+      {
+        "from": "codegen-swift",
+        "allow": ["codegen"]
+      },
+      {
+        "from": "codegen-kotlin",
+        "allow": ["codegen"]
+      },
+      {
+        "from": "loco",
+        "allow": []
+      },
+      {
+        "from": "loco-cli",
+        "allow": ["loco", "codegen"]
+      },
+      {
+        "from": "loco-react",
+        "allow": ["loco", "codegen", "codegen-typescript"]
+      },
+      {
+        "from": "loco-svelte",
+        "allow": ["loco", "codegen", "codegen-typescript"]
+      },
+      {
+        "from": "loco-swiftui",
+        "allow": ["loco", "codegen", "codegen-swift"]
+      },
+      {
+        "from": "loco-uikit",
+        "allow": ["loco", "codegen", "codegen-swift"]
+      },
+      {
+        "from": "loco-compose",
+        "allow": ["loco", "codegen", "codegen-kotlin"]
+      }
+    ]
+  },
+  "health": {
+    "maxCyclomatic": 20,
+    "maxCognitive": 15,
+    "maxCrap": 30,
+    "coverage": "coverage/coverage-final.json"
+  }
+}

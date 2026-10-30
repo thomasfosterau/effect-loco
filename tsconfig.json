@@ -7,90 +7,43 @@
     }
   ],
   "include": [
-    "**/vitest.*.ts",
+    "vite.config.ts",
+    "vite.package.ts",
+    "vitest.setup.ts",
+    "./packages/*/vite.config.ts",
     "./packages/*/test/**/*.ts",
-    "./packages/*/test/**/*.json",
-    "./scripts/**/*.ts"
+    "./packages/*/test/**/*.json"
   ],
-  "exclude": [
-    "**/node_modules",
-    "**/dist"
-  ],
+  "exclude": ["**/node_modules", "**/dist"],
   "compilerOptions": {
     "rootDir": ".",
     "noEmit": true,
     "erasableSyntaxOnly": false,
     "resolveJsonModule": true,
-    "types": [
-      "node"
-    ],
+    "types": ["node"],
     "paths": {
-      "@thomasfosterau/effect-codegen": [
-        "./packages/codegen/src/index.ts"
-      ],
-      "@thomasfosterau/effect-codegen/*": [
-        "./packages/codegen/src/*.ts"
-      ],
-      "@thomasfosterau/effect-codegen-typescript": [
-        "./packages/codegen-typescript/src/index.ts"
-      ],
-      "@thomasfosterau/effect-codegen-typescript/*": [
-        "./packages/codegen-typescript/src/*.ts"
-      ],
-      "@thomasfosterau/effect-codegen-swift": [
-        "./packages/codegen-swift/src/index.ts"
-      ],
-      "@thomasfosterau/effect-codegen-swift/*": [
-        "./packages/codegen-swift/src/*.ts"
-      ],
-      "@thomasfosterau/effect-codegen-kotlin": [
-        "./packages/codegen-kotlin/src/index.ts"
-      ],
-      "@thomasfosterau/effect-codegen-kotlin/*": [
-        "./packages/codegen-kotlin/src/*.ts"
-      ],
-      "@thomasfosterau/effect-loco": [
-        "./packages/loco/src/index.ts"
-      ],
-      "@thomasfosterau/effect-loco/*": [
-        "./packages/loco/src/*.ts"
-      ],
-      "@thomasfosterau/effect-loco-cli": [
-        "./packages/loco-cli/src/index.ts"
-      ],
-      "@thomasfosterau/effect-loco-cli/*": [
-        "./packages/loco-cli/src/*.ts"
-      ],
-      "@thomasfosterau/effect-loco-react": [
-        "./packages/loco-react/src/index.ts"
-      ],
-      "@thomasfosterau/effect-loco-react/*": [
-        "./packages/loco-react/src/*.ts"
-      ],
-      "@thomasfosterau/effect-loco-svelte": [
-        "./packages/loco-svelte/src/index.ts"
-      ],
-      "@thomasfosterau/effect-loco-svelte/*": [
-        "./packages/loco-svelte/src/*.ts"
-      ],
-      "@thomasfosterau/effect-loco-swiftui": [
-        "./packages/loco-swiftui/src/index.ts"
-      ],
-      "@thomasfosterau/effect-loco-swiftui/*": [
-        "./packages/loco-swiftui/src/*.ts"
-      ],
-      "@thomasfosterau/effect-loco-uikit": [
-        "./packages/loco-uikit/src/index.ts"
-      ],
-      "@thomasfosterau/effect-loco-uikit/*": [
-        "./packages/loco-uikit/src/*.ts"
-      ],
-      "@thomasfosterau/effect-loco-compose": [
-        "./packages/loco-compose/src/index.ts"
-      ],
-      "@thomasfosterau/effect-loco-compose/*": [
-        "./packages/loco-compose/src/*.ts"
-      ]
+      "@thomasfosterau/effect-codegen": ["./packages/codegen/src/index.ts"],
+      "@thomasfosterau/effect-codegen/*": ["./packages/codegen/src/*.ts"],
+      "@thomasfosterau/effect-codegen-typescript": ["./packages/codegen-typescript/src/index.ts"],
+      "@thomasfosterau/effect-codegen-typescript/*": ["./packages/codegen-typescript/src/*.ts"],
+      "@thomasfosterau/effect-codegen-swift": ["./packages/codegen-swift/src/index.ts"],
+      "@thomasfosterau/effect-codegen-swift/*": ["./packages/codegen-swift/src/*.ts"],
+      "@thomasfosterau/effect-codegen-kotlin": ["./packages/codegen-kotlin/src/index.ts"],
+      "@thomasfosterau/effect-codegen-kotlin/*": ["./packages/codegen-kotlin/src/*.ts"],
+      "@thomasfosterau/effect-loco": ["./packages/loco/src/index.ts"],
+      "@thomasfosterau/effect-loco/*": ["./packages/loco/src/*.ts"],
+      "@thomasfosterau/effect-loco-cli": ["./packages/loco-cli/src/index.ts"],
+      "@thomasfosterau/effect-loco-cli/*": ["./packages/loco-cli/src/*.ts"],
+      "@thomasfosterau/effect-loco-react": ["./packages/loco-react/src/index.ts"],
+      "@thomasfosterau/effect-loco-react/*": ["./packages/loco-react/src/*.ts"],
+      "@thomasfosterau/effect-loco-svelte": ["./packages/loco-svelte/src/index.ts"],
+      "@thomasfosterau/effect-loco-svelte/*": ["./packages/loco-svelte/src/*.ts"],
+      "@thomasfosterau/effect-loco-swiftui": ["./packages/loco-swiftui/src/index.ts"],
+      "@thomasfosterau/effect-loco-swiftui/*": ["./packages/loco-swiftui/src/*.ts"],
+      "@thomasfosterau/effect-loco-uikit": ["./packages/loco-uikit/src/index.ts"],
+      "@thomasfosterau/effect-loco-uikit/*": ["./packages/loco-uikit/src/*.ts"],
+      "@thomasfosterau/effect-loco-compose": ["./packages/loco-compose/src/index.ts"],
+      "@thomasfosterau/effect-loco-compose/*": ["./packages/loco-compose/src/*.ts"]
     },
     "plugins": [
       {

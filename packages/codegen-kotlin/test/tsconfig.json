@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json.schemastore.org/tsconfig",
+  // oxlint-tsgolint (type-aware `vp check`) types a file with its nearest
+  // tsconfig.json; this hands the suite the root project's `paths`, which map
+  // every workspace package to its `src/`. The type gate (`vp run check`)
+  // reaches these files through the root tsconfig.json itself.
+  "extends": "../../../tsconfig.json",
+  "include": ["./**/*.ts"],
+  "compilerOptions": {
+    // Not a referenced build project: sibling sources come in through `paths`.
+    "composite": false,
+    "incremental": false,
+    "declarationMap": false
+  }
+}

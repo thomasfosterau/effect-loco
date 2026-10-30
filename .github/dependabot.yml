@@ -1,0 +1,110 @@
+# Dependabot version updates.
+#
+# Groups are matched in order and the FIRST match wins, so they run from the
+# most specific to the most general. Every lockstep set moves as one PR, all
+# update types (major included), because a PR that moves one member alone
+# goes red:
+#
+# - `toolchain`: vite-plus pins `oxlint`, `oxfmt`, `oxlint-tsgolint` and
+#   `vitest` to exact versions, `vite` is its aliased core and
+#   `@vitest/coverage-istanbul` must equal its vitest; `effect-tsgo patch`
+#   (the `prepare` step) matches the native `tsc` (`@typescript/native`),
+#   `oxlint` and `oxlint-tsgolint` by gitHead and hard-errors on any pairing it
+#   has no artifact for; `typescript` is the TS6 alias beside it; the Effect
+#   oxlint plugin (`@enfect/oxlint`) loads inside that oxlint. Read the catalog
+#   comments in pnpm-workspace.yaml before merging one.
+# - `changesets`, `fallow`: their own release cadence.
+# - `effect`: the lockstep-versioned Effect release line (`effect`,
+#   `@effect/platform-node`, `@effect/vitest`, `@effect/language-service`),
+#   minus `@effect/tsgo` (toolchain).
+# - `minor-and-patch`: everything else (`@types/node`); a major of one of
+#   these opens its own PR.
+#
+# Hand moves Dependabot cannot make (do them on the matching PR's branch):
+# - `vite` is an npm alias (`npm:@voidzero-dev/vite-plus-core@<v>`) and must
+#   name the same version as `vite-plus`; Dependabot cannot rewrite aliases.
+#   Likewise `typescript` (`npm:@typescript/typescript6@<v>`) and
+#   `@typescript/native` (`npm:typescript@<v>`), which must match a release in
+#   `@effect/tsgo`'s `components` table.
+# - `vitest` / `@vitest/coverage-istanbul` must equal vite-plus's exact vitest
+#   pin, and `@effect/tsgo` must support vite-plus's oxlint / tsgolint: when
+#   the toolchain PR goes red at `pnpm install`, pick the pairing by hand.
+# - `@effect/platform-node-shared` is transitive (through
+#   `@effect/platform-node`), so it moves when the `effect` group does.
+# - The `overrides` (`effect`, `vite@*`, `vitest@*`) follow their catalog
+#   entries; `catalogs.peers` ranges are by hand, with a changeset.
+#
+# `cooldown`: pnpm-workspace.yaml's `minimumReleaseAge` is 480 minutes
+# (8 hours). Dependabot's cooldown only takes whole days, so it is 1 day,
+# which is longer than pnpm's hold: a Dependabot PR never proposes a version
+# pnpm would still refuse to install. Same first-party exemption.
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "chore"
+    cooldown:
+      default-days: 1
+      exclude:
+        - "@thomasfosterau/*"
+    groups:
+      toolchain:
+        applies-to: version-updates
+        patterns:
+          - "vite-plus"
+          - "vite"
+          - "vitest"
+          - "@vitest/*"
+          - "oxlint"
+          - "oxfmt"
+          - "oxlint-tsgolint"
+          - "@oxlint/*"
+          - "@effect/tsgo"
+          - "@typescript/native"
+          - "typescript"
+          - "@typescript/typescript6"
+          - "@enfect/oxlint"
+        update-types: ["major", "minor", "patch"]
+      changesets:
+        applies-to: version-updates
+        patterns:
+          - "@changesets/*"
+        update-types: ["major", "minor", "patch"]
+      fallow:
+        applies-to: version-updates
+        patterns:
+          - "fallow"
+        update-types: ["major", "minor", "patch"]
+      effect:
+        applies-to: version-updates
+        patterns:
+          - "effect"
+          - "@effect/*"
+        exclude-patterns:
+          - "@effect/tsgo"
+        update-types: ["major", "minor", "patch"]
+      minor-and-patch:
+        applies-to: version-updates
+        patterns:
+          - "*"
+        update-types: ["minor", "patch"]
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "chore"
+    cooldown:
+      default-days: 1
+    groups:
+      github-actions:
+        applies-to: version-updates
+        patterns:
+          - "*"

@@ -8,10 +8,5 @@
   "updateInternalDependencies": "patch",
   "ignore": [],
   "privatePackages": false,
-  "fixed": [
-    [
-      "@thomasfosterau/effect-loco",
-      "@thomasfosterau/effect-loco-*"
-    ]
-  ]
+  "fixed": [["@thomasfosterau/effect-loco", "@thomasfosterau/effect-loco-*"]]
 }

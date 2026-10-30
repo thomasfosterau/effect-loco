@@ -1,3 +1,106 @@
 packages:
   - packages/*
   - examples/*
+
+# EVERY external dependency version lives here: package.json files reference
+# only `catalog:`, `catalog:peers` or `workspace:^`. `catalogMode: strict`
+# makes `pnpm add` write `catalog:` and reject a version outside the catalog.
+# After editing this catalog, ALWAYS run `pnpm install` and commit the
+# regenerated pnpm-lock.yaml: a stale lockfile fails CI at once with
+# ERR_PNPM_LOCKFILE_CONFIG_MISMATCH.
+#
+# The `effect` line is a singleton: two copies break Context / Layer / Schema
+# identity at runtime, so the `overrides` below force one copy.
+catalogMode: strict
+
+catalog:
+  "@changesets/changelog-github": ^1.0.1
+  "@changesets/cli": ^3.0.3
+  # The Effect release line moves as one (the `effect` Dependabot group):
+  # `effect`, `@effect/platform-node` (and the `@effect/platform-node-shared`
+  # it pulls in), `@effect/vitest` and `@effect/language-service`.
+  "@effect/language-service": ^0.87.5
+  "@effect/platform-node": 4.0.7
+  # Effect Language Service as a native (TypeScript-Go) binary, the TS7 side
+  # of the 6/7 split below. `effect-tsgo patch` (the root `prepare` script)
+  # overwrites the native `tsc` and vite-plus's `oxlint` / `oxlint-tsgolint`
+  # with Effect-patched builds matched by gitHead, so this pins in lockstep
+  # with `@typescript/native` and with the oxlint / tsgolint `vite-plus`
+  # carries: 0.63.0 supports typescript 7.0.2, oxlint 1.88.0 – 1.90.0 and
+  # tsgolint 7.0.2004 / 7.0.2005; vite-plus 1.4.0 carries oxlint 1.89.0 and
+  # tsgolint 7.0.2004. Each release hard-errors
+  # (UnsupportedTargetPackageVersionError) on any other component version,
+  # failing `pnpm install` itself. Read the `components` table in
+  # node_modules/@effect/tsgo/dist/effect-tsgo.cjs before bumping any of the
+  # three.
+  "@effect/tsgo": 0.63.0
+  "@effect/vitest": 4.0.7
+  # The Effect oxlint rules (`effect/*`, `configs.recommended`, the anti-slop
+  # rules included), loaded by vite-plus's oxlint as a JS plugin. It depends
+  # on `effect` 4.1.0 (exact) but runs on the singleton the `effect` override
+  # below forces. Moves in the `toolchain` Dependabot group (it loads inside
+  # oxlint).
+  "@enfect/oxlint": ^0.9.0
+  "@types/node": ^26.6.6
+  # Must equal the vitest that vite-plus bundles (see `vitest` below); vite-plus
+  # refuses to run coverage on a mismatch. Istanbul, because `fallow audit`
+  # reads its coverage-final.json map.
+  "@vitest/coverage-istanbul": 5.0.5
+  effect: 4.0.7
+  fallow: 3.37.0
+  # TypeScript 6/7 side by side: TS7 (the native Go compiler) ships no JS API
+  # until 7.1, so the JS-API consumers (tsdown's declaration bundler under
+  # `vp pack`, @effect/language-service in an editor) stay on TS6 while the
+  # native `tsc` type-checks. The alias keeps the TS6 package importable as
+  # `typescript` (bin `tsc6`); `@typescript/native` is TS7 (bin `tsc`).
+  # Pinned exact: @typescript/native's gitHead must match @effect/tsgo's
+  # bundled binary.
+  typescript: "npm:@typescript/typescript6@6.0.2"
+  "@typescript/native": "npm:typescript@7.0.2"
+  # vite-plus pins `oxlint`, `oxfmt`, `oxlint-tsgolint` and `vitest` to exact
+  # versions, so this entry decides the oxlint version `effect-tsgo patch
+  # --oxlint` has to support (see @effect/tsgo above): 1.4.0 carries oxlint
+  # 1.89.0, oxfmt 0.74.0, tsgolint 7.0.2004 and vitest 5.0.5. `vite` is the
+  # same release under its aliased core package (an npm alias Dependabot cannot
+  # bump: move it by hand with `vite-plus`), and `vitest` must match vite-plus's
+  # exact pin because the `vitest@*` override forces every resolution to it.
+  vite-plus: 1.4.0
+  vite: npm:@voidzero-dev/vite-plus-core@1.4.0
+  vitest: 5.0.5
+
+# Peer ranges the PUBLISHED packages declare. A named catalog so strict mode
+# still governs them while they stay ranges; `pnpm publish` writes these
+# ranges into the published manifests. Raising the floor is a breaking change.
+catalogs:
+  peers:
+    effect: ^4.0.7
+
+overrides:
+  # `effect` MUST be a singleton (see the header).
+  effect: "catalog:"
+  # Vite+'s managed overrides (`vp migrate` writes them under these keys):
+  # every `vite` / `vitest` resolution is the catalog singleton.
+  "vite@*": "catalog:"
+  "vitest@*": "catalog:"
+
+peerDependencyRules:
+  allowAny:
+    - vite
+    - vitest
+  allowedVersions:
+    vite: "*"
+    vitest: "*"
+
+# Dependencies whose install scripts may run: `fallow` fetches its native
+# binary in a postinstall step.
+onlyBuiltDependencies:
+  - fallow
+
+# Supply-chain delay (owner's policy, relaxed to 8 hours on 2026-10-30): hold
+# newly published versions for 8 hours (unit: MINUTES) before pnpm installs
+# them. Dependabot's `cooldown` (whole days only) is 1 day, longer than this,
+# so it never proposes a version pnpm would still refuse.
+minimumReleaseAge: 480
+minimumReleaseAgeExclude:
+  # First-party releases install immediately.
+  - "@thomasfosterau/*"
