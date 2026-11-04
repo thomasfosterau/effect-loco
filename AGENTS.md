@@ -93,8 +93,6 @@ which can resolve to a pre-release). `uvx zizmor --offline .github` audits the w
 - A PreToolUse hook (`.claude/hooks/fallow-gate.sh`) blocks `git commit` / `git push` when
   `fallow audit --base origin/main` fails; it reads the coverage map on disk, so run `vp run test:coverage` first. A
   PostToolUse hook runs `vp fmt` on every source, JSON, CSS or Markdown file you write or edit.
-- `.claude/settings.json` enables the `@enfect/claude` plugin (Effect guidance, skills and post-write pattern checks),
-  pinned by `ref` to a reviewed `mpsuesser/enfect` commit.
 
 ## Fallow local gate
 
