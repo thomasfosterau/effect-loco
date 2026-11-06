@@ -18,7 +18,8 @@ catalog:
   "@changesets/cli": ^3.0.3
   # The Effect release line moves as one (the `effect` Dependabot group):
   # `effect`, `@effect/platform-node` (and the `@effect/platform-node-shared`
-  # it pulls in), `@effect/vitest` and `@effect/language-service`.
+  # it pulls in) and `@effect/vitest`. `@effect/language-service` has its own
+  # version line and updates alone.
   "@effect/language-service": ^0.87.5
   "@effect/platform-node": 4.0.7
   # Effect Language Service as a native (TypeScript-Go) binary, the TS7 side
@@ -38,8 +39,8 @@ catalog:
   # The Effect oxlint rules (`effect/*`, `configs.recommended`, the anti-slop
   # rules included), loaded by vite-plus's oxlint as a JS plugin. It depends
   # on `effect` 4.1.0 (exact) but runs on the singleton the `effect` override
-  # below forces. Moves in the `toolchain` Dependabot group (it loads inside
-  # oxlint).
+  # below forces. Ungrouped in Dependabot: it ranges `@oxlint/plugins`
+  # `^1.85.0`, so no vite-plus oxlint pins it.
   "@enfect/oxlint": ^0.9.0
   "@types/node": ^26.6.6
   # Must equal the vitest that vite-plus bundles (see `vitest` below); vite-plus
@@ -47,7 +48,7 @@ catalog:
   # reads its coverage-final.json map.
   "@vitest/coverage-istanbul": 5.0.5
   effect: 4.0.7
-  fallow: 3.37.0
+  fallow: 3.40.0
   # TypeScript 6/7 side by side: TS7 (the native Go compiler) ships no JS API
   # until 7.1, so the JS-API consumers (tsdown's declaration bundler under
   # `vp pack`, @effect/language-service in an editor) stay on TS6 while the

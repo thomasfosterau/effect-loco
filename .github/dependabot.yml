@@ -1,24 +1,24 @@
 # Dependabot version updates.
 #
-# Groups are matched in order and the FIRST match wins, so they run from the
-# most specific to the most general. Every lockstep set moves as one PR, all
-# update types (major included), because a PR that moves one member alone
-# goes red:
+# A group exists only where its members must move at the same time (one
+# release train, or a hard compatibility table); everything else, each
+# GitHub Action included, updates on its own PR. Groups are matched in order
+# and the FIRST match wins, so `exclude-patterns` keep `@effect/tsgo` out of
+# `effect`. Each group takes every update type (major included), because a
+# PR that moves one member alone goes red:
 #
 # - `toolchain`: vite-plus pins `oxlint`, `oxfmt`, `oxlint-tsgolint` and
 #   `vitest` to exact versions, `vite` is its aliased core and
 #   `@vitest/coverage-istanbul` must equal its vitest; `effect-tsgo patch`
 #   (the `prepare` step) matches the native `tsc` (`@typescript/native`),
 #   `oxlint` and `oxlint-tsgolint` by gitHead and hard-errors on any pairing it
-#   has no artifact for; `typescript` is the TS6 alias beside it; the Effect
-#   oxlint plugin (`@enfect/oxlint`) loads inside that oxlint. Read the catalog
-#   comments in pnpm-workspace.yaml before merging one.
-# - `changesets`, `fallow`: their own release cadence.
+#   has no artifact for; `typescript` is the TS6 alias beside it. Read the
+#   catalog comments in pnpm-workspace.yaml before merging one. The Effect
+#   oxlint plugin (`@enfect/oxlint`) is not in it: it ranges `@oxlint/plugins`
+#   `^1.85.0`, so no oxlint pins it.
 # - `effect`: the lockstep-versioned Effect release line (`effect`,
-#   `@effect/platform-node`, `@effect/vitest`, `@effect/language-service`),
-#   minus `@effect/tsgo` (toolchain).
-# - `minor-and-patch`: everything else (`@types/node`); a major of one of
-#   these opens its own PR.
+#   `@effect/platform-node`, `@effect/vitest`), minus `@effect/tsgo`
+#   (toolchain) and `@effect/language-service` (its own version line).
 #
 # Hand moves Dependabot cannot make (do them on the matching PR's branch):
 # - `vite` is an npm alias (`npm:@voidzero-dev/vite-plus-core@<v>`) and must
@@ -53,6 +53,7 @@ updates:
       exclude:
         - "@thomasfosterau/*"
     groups:
+      # vite-plus pins vite / vitest / oxlint; the tsgo patch pairs with them.
       toolchain:
         applies-to: version-updates
         patterns:
@@ -60,26 +61,12 @@ updates:
           - "vite"
           - "vitest"
           - "@vitest/*"
-          - "oxlint"
-          - "oxfmt"
-          - "oxlint-tsgolint"
-          - "@oxlint/*"
           - "@effect/tsgo"
           - "@typescript/native"
           - "typescript"
           - "@typescript/typescript6"
-          - "@enfect/oxlint"
         update-types: ["major", "minor", "patch"]
-      changesets:
-        applies-to: version-updates
-        patterns:
-          - "@changesets/*"
-        update-types: ["major", "minor", "patch"]
-      fallow:
-        applies-to: version-updates
-        patterns:
-          - "fallow"
-        update-types: ["major", "minor", "patch"]
+      # One release train: every Effect runtime package at one version.
       effect:
         applies-to: version-updates
         patterns:
@@ -87,12 +74,8 @@ updates:
           - "@effect/*"
         exclude-patterns:
           - "@effect/tsgo"
+          - "@effect/language-service"
         update-types: ["major", "minor", "patch"]
-      minor-and-patch:
-        applies-to: version-updates
-        patterns:
-          - "*"
-        update-types: ["minor", "patch"]
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
@@ -101,10 +84,6 @@ updates:
     open-pull-requests-limit: 5
     commit-message:
       prefix: "chore"
+    # No groups: each action updates on its own PR.
     cooldown:
       default-days: 1
-    groups:
-      github-actions:
-        applies-to: version-updates
-        patterns:
-          - "*"
