@@ -71,10 +71,25 @@ catalog:
 
 # Peer ranges the PUBLISHED packages declare. A named catalog so strict mode
 # still governs them while they stay ranges; `pnpm publish` writes these
-# ranges into the published manifests. Raising the floor is a breaking change.
+# ranges into the published manifests. Raising a floor is a breaking change.
+#
+# The owner's peer-range policy: `effect` is `^4.0.0`, decided per package. A
+# package whose own dependencies require a newer `effect` gets a named catalog
+# of its own whose comment names that dependency; our own code using a newer
+# API is never a reason (make it work on 4.0.0 instead). Each floor is proved
+# by running `vp run check` and the unit suites with the `effect` pin above
+# set to it.
 catalogs:
+  # Every published package except `@thomasfosterau/effect-loco-cli`.
   peers:
-    effect: ^4.0.7
+    effect: ^4.0.0
+  # `@thomasfosterau/effect-loco-cli` only: its runtime dependency
+  # `@effect/platform-node` (pinned above at 4.0.7, which declares
+  # `effect: ^4.0.7`) depends on `@effect/platform-node-shared: ^4.0.7`, whose
+  # current release (4.1.2, what a fresh install resolves) declares
+  # `effect: ^4.1.2`. Move it with those releases.
+  platform-node-peers:
+    effect: ^4.1.2
 
 overrides:
   # `effect` MUST be a singleton (see the header).

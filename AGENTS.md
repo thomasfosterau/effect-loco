@@ -23,7 +23,7 @@
 ## Common pitfalls
 
 - **Never edit a version in a `package.json`.** Every external version lives in the `pnpm-workspace.yaml` catalog
-  (`catalogMode: strict`; published peer ranges under `catalogs.peers`); manifests carry only `catalog:`,
+  (`catalogMode: strict`; published peer ranges under `catalogs.peers`, and the CLI's under `catalogs.platform-node-peers`); manifests carry only `catalog:`,
   `catalog:peers` or `workspace:^`. After editing the catalog, run `pnpm install` and commit `pnpm-lock.yaml`.
 - **`vite-plus`, `@effect/tsgo` and `@typescript/native` move together.** `pnpm install`'s `prepare` step runs
   `effect-tsgo patch --typescript --oxlint`, which hard-errors on a `tsc` / `oxlint` / `oxlint-tsgolint` it has no
@@ -34,6 +34,9 @@
   `catalogs.peers`, as that file's header lists.
 - **`effect` is a peer, never a dependency** of a published package: two copies break `Context` / `Layer` / `Schema`
   identity. The `effect` override forces one copy.
+- **The `effect` peer is `^4.0.0`, per package.** Raise a package's floor only when one of its own dependencies
+  requires a newer `effect`, in a named catalog whose comment names that dependency (the CLI's
+  `catalogs.platform-node-peers`, forced by `@effect/platform-node`); never because our code uses a newer API.
 - **Development `exports` point at `src/`, published ones at `dist/`** (`publishConfig.exports`), so siblings and
   type-aware lint resolve each other from source and no task needs a build first.
 
