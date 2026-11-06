@@ -6,7 +6,7 @@
     "changeset-version": "changeset version && vp fmt && pnpm install --lockfile-only",
     "changeset-publish": "vp run build && changeset publish",
     "fallow": "fallow --summary",
-    "fallow:audit": "fallow audit --base origin/main",
+    "fallow:audit": "fallow audit --base origin/trunk",
     "prepare": "vp config && effect-tsgo patch --typescript --oxlint"
   },
   "devDependencies": {
