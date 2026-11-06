@@ -95,7 +95,7 @@ which can resolve to a pre-release). `uvx zizmor --offline .github` audits the w
 
 - The SessionStart hook (`.claude/hooks/session-start.sh`) installs the global Vite+ CLI at the catalog's `vite-plus`
   pin with the official installer (npm-provenance and SHA-512 checked; the session's network must allow `vite.plus`
-  and `viteplus.dev`), links `vp` and `vpx` into `~/.local/bin`, runs `vp install --frozen-lockfile`, and repairs a
+  and `viteplus.dev`), links `vp` and `vpx` into `~/.local/bin` (the CLI lives under `$VP_HOME` when set, as in the Vite+ container image, else `~/.local/share/vite-plus`), runs `vp install --frozen-lockfile`, and repairs a
   broken bare `node`. Nothing else goes on PATH: the global `vp` delegates to each checkout's own `vite-plus`
   (worktrees included, after their own `vp install`), fallow runs as `vp exec fallow …`, and TypeScript scripts as
   `vpx <file>.ts`. If the installer can't run, `vp` falls back to this checkout's `node_modules` copy. It hydrates no
