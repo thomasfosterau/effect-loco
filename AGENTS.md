@@ -61,7 +61,8 @@
 - `vp run -r build` — `vp pack` (tsdown) → every package's `dist/`.
 - `vp run test:coverage` — every suite under one Istanbul map at `coverage/coverage-final.json`, which `fallow audit`
   reads.
-- `fallow` (`pnpm run fallow`) — dead code, duplication, complexity and the package boundaries (`.fallowrc.json`).
+- `vp run fallow` (`fallow --summary`; any other fallow command is `vp exec fallow …`) — dead code, duplication,
+  complexity and the package boundaries (`.fallowrc.json`).
 - `pnpm changeset` — add a changeset.
 
 Invoke everything through `vp` (`vp exec` instead of `npx`). When adding a package: give it a `vite.config.ts` that
@@ -79,8 +80,9 @@ with its final pass/fail:
 3. `vp run -r test:unit`
 4. `vp run -r build`
 5. `pnpm audit --audit-level high` (network)
-6. `vp run test:coverage`, then `fallow audit --format json --quiet --explain --gate-marker agent --base origin/trunk`
-   (the fallow gate below; not a CI step).
+6. `vp run test:coverage`, then
+   `vp exec fallow audit --format json --quiet --explain --gate-marker agent --base origin/trunk` (the fallow gate
+   below; not a CI step).
 
 CI runs steps 1–5 in one job with a read-only token and no secrets, so Dependabot PRs run it safely. Every action is
 pinned to a commit SHA, checkout never persists credentials, and Node is `"*"` with `check-latest` (never `latest`,
@@ -88,11 +90,18 @@ which can resolve to a pre-release). `uvx zizmor --offline .github` audits the w
 
 ## Agent sessions
 
-- The SessionStart hook (`.claude/hooks/session-start.sh`) installs dependencies against the lockfile and puts `vp`
-  (a re-exec shim) and `fallow` on PATH for non-interactive shells. It hydrates no secrets.
+- The SessionStart hook (`.claude/hooks/session-start.sh`) installs the global Vite+ CLI at the catalog's `vite-plus`
+  pin with the official installer (npm-provenance and SHA-512 checked; the session's network must allow `vite.plus`
+  and `viteplus.dev`), links `vp` and `vpx` into `~/.local/bin`, runs `vp install --frozen-lockfile`, and repairs a
+  broken bare `node`. Nothing else goes on PATH: the global `vp` delegates to each checkout's own `vite-plus`
+  (worktrees included, after their own `vp install`), fallow runs as `vp exec fallow …`, and TypeScript scripts as
+  `vpx <file>.ts`. If the installer can't run, `vp` falls back to this checkout's `node_modules` copy. It hydrates no
+  secrets.
 - A PreToolUse hook (`.claude/hooks/fallow-gate.sh`) blocks `git commit` / `git push` when
-  `fallow audit --base origin/trunk` fails; it reads the coverage map on disk, so run `vp run test:coverage` first. A
-  PostToolUse hook runs `vp fmt` on every source, JSON, CSS or Markdown file you write or edit.
+  `fallow audit --base origin/trunk` (run through `vp exec fallow`) fails, only in this checkout and its
+  `.claude/worktrees/*`: from any other tree it runs none of that tree's tooling and skips the audit with a notice. It
+  reads the coverage map on disk, so run `vp run test:coverage` first. A PostToolUse hook runs `vp fmt` on every
+  source, JSON, CSS or Markdown file you write or edit.
 
 ## Fallow local gate
 
