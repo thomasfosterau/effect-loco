@@ -79,7 +79,7 @@ with its final pass/fail:
 3. `vp run -r test:unit`
 4. `vp run -r build`
 5. `pnpm audit --audit-level high` (network)
-6. `vp run test:coverage`, then `fallow audit --format json --quiet --explain --gate-marker agent --base origin/main`
+6. `vp run test:coverage`, then `fallow audit --format json --quiet --explain --gate-marker agent --base origin/trunk`
    (the fallow gate below; not a CI step).
 
 CI runs steps 1–5 in one job with a read-only token and no secrets, so Dependabot PRs run it safely. Every action is
@@ -91,12 +91,12 @@ which can resolve to a pre-release). `uvx zizmor --offline .github` audits the w
 - The SessionStart hook (`.claude/hooks/session-start.sh`) installs dependencies against the lockfile and puts `vp`
   (a re-exec shim) and `fallow` on PATH for non-interactive shells. It hydrates no secrets.
 - A PreToolUse hook (`.claude/hooks/fallow-gate.sh`) blocks `git commit` / `git push` when
-  `fallow audit --base origin/main` fails; it reads the coverage map on disk, so run `vp run test:coverage` first. A
+  `fallow audit --base origin/trunk` fails; it reads the coverage map on disk, so run `vp run test:coverage` first. A
   PostToolUse hook runs `vp fmt` on every source, JSON, CSS or Markdown file you write or edit.
 
 ## Fallow local gate
 
-Before any `git commit` or `git push`, run `fallow audit --format json --quiet --explain --gate-marker agent --base origin/main`. If the verdict is `fail`, fix the reported findings before retrying. Treat JSON runtime errors like `{ "error": true, ... }` as non-blocking. Audit defaults to `gate=new-only`: only findings introduced by the current changeset affect the verdict.
+Before any `git commit` or `git push`, run `fallow audit --format json --quiet --explain --gate-marker agent --base origin/trunk`. If the verdict is `fail`, fix the reported findings before retrying. Treat JSON runtime errors like `{ "error": true, ... }` as non-blocking. Audit defaults to `gate=new-only`: only findings introduced by the current changeset affect the verdict.
 
 ## Fallow task map
 
@@ -104,7 +104,7 @@ Before any `git commit` or `git push`, run `fallow audit --format json --quiet -
 | ----------------------------------------------------------------- | -------------------------------------------- |
 | delete an "unused" export or file                                 | `fallow dead-code --trace <file>:<export>`   |
 | delete an "unused" dependency                                     | `fallow dead-code --trace-dependency <name>` |
-| commit or open a PR                                               | `fallow audit --base origin/main`            |
+| commit or open a PR                                               | `fallow audit --base origin/trunk`           |
 | check which architecture rules apply to a file before changing it | `fallow guard <files>`                       |
 | understand a finding                                              | `fallow explain <issue-type>`                |
 
