@@ -27,8 +27,8 @@
   `catalog:peers` or `workspace:^`. After editing the catalog, run `pnpm install` and commit `pnpm-lock.yaml`.
 - **`vite-plus`, `@effect/tsgo` and `@typescript/native` move together.** `pnpm install`'s `prepare` step runs
   `effect-tsgo patch --typescript --oxlint`, which hard-errors on a `tsc` / `oxlint` / `oxlint-tsgolint` it has no
-  build for; read the catalog comments first. Dependabot (`.github/dependabot.yml`) groups every lockstep set
-  (`toolchain`, `effect`, `changesets`, `fallow`, `github-actions`) with a 1-day cooldown (pnpm's
+  build for; read the catalog comments first. Dependabot (`.github/dependabot.yml`) groups only the lockstep sets
+  (`toolchain`, `effect`; everything else, `@enfect/oxlint` and each GitHub Action included, gets its own PR) with a 1-day cooldown (pnpm's
   `minimumReleaseAge` is 480 minutes, 8 hours). By hand, on the matching PR's branch: the npm aliases (`vite`, equal to
   `vite-plus`; `typescript` and `@typescript/native`, a pairing `@effect/tsgo` supports), the `overrides` and
   `catalogs.peers`, as that file's header lists.
