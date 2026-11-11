@@ -48,7 +48,7 @@ catalog:
   # reads its coverage-final.json map.
   "@vitest/coverage-istanbul": 5.0.5
   effect: 4.1.2
-  fallow: 3.40.0
+  fallow: 3.41.0
   # TypeScript 6/7 side by side: TS7 (the native Go compiler) ships no JS API
   # until 7.1, so the JS-API consumers (tsdown's declaration bundler under
   # `vp pack`, @effect/language-service in an editor) stay on TS6 while the
