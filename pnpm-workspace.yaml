@@ -21,7 +21,7 @@ catalog:
   # it pulls in) and `@effect/vitest`. `@effect/language-service` has its own
   # version line and updates alone.
   "@effect/language-service": ^0.87.5
-  "@effect/platform-node": 4.0.7
+  "@effect/platform-node": 4.1.2
   # Effect Language Service as a native (TypeScript-Go) binary, the TS7 side
   # of the 6/7 split below. `effect-tsgo patch` (the root `prepare` script)
   # overwrites the native `tsc` and vite-plus's `oxlint` / `oxlint-tsgolint`
@@ -35,7 +35,7 @@ catalog:
   # node_modules/@effect/tsgo/dist/effect-tsgo.cjs before bumping any of the
   # three.
   "@effect/tsgo": 0.63.0
-  "@effect/vitest": 4.0.7
+  "@effect/vitest": 4.1.2
   # The Effect oxlint rules (`effect/*`, `configs.recommended`, the anti-slop
   # rules included), loaded by vite-plus's oxlint as a JS plugin. It depends
   # on `effect` 4.1.0 (exact) but runs on the singleton the `effect` override
@@ -47,7 +47,7 @@ catalog:
   # refuses to run coverage on a mismatch. Istanbul, because `fallow audit`
   # reads its coverage-final.json map.
   "@vitest/coverage-istanbul": 5.0.5
-  effect: 4.0.7
+  effect: 4.1.2
   fallow: 3.40.0
   # TypeScript 6/7 side by side: TS7 (the native Go compiler) ships no JS API
   # until 7.1, so the JS-API consumers (tsdown's declaration bundler under
