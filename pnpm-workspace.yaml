@@ -34,7 +34,7 @@ catalog:
   # failing `pnpm install` itself. Read the `components` table in
   # node_modules/@effect/tsgo/dist/effect-tsgo.cjs before bumping any of the
   # three.
-  "@effect/tsgo": 0.63.0
+  "@effect/tsgo": 0.67.5
   "@effect/vitest": 4.1.2
   # The Effect oxlint rules (`effect/*`, `configs.recommended`, the anti-slop
   # rules included), loaded by vite-plus's oxlint as a JS plugin. It depends
@@ -46,7 +46,7 @@ catalog:
   # Must equal the vitest that vite-plus bundles (see `vitest` below); vite-plus
   # refuses to run coverage on a mismatch. Istanbul, because `fallow audit`
   # reads its coverage-final.json map.
-  "@vitest/coverage-istanbul": 5.0.5
+  "@vitest/coverage-istanbul": 5.1.0
   effect: 4.1.2
   fallow: 3.41.0
   # TypeScript 6/7 side by side: TS7 (the native Go compiler) ships no JS API
@@ -65,9 +65,9 @@ catalog:
   # same release under its aliased core package (an npm alias Dependabot cannot
   # bump: move it by hand with `vite-plus`), and `vitest` must match vite-plus's
   # exact pin because the `vitest@*` override forces every resolution to it.
-  vite-plus: 1.4.0
+  vite-plus: 1.5.1
   vite: npm:@voidzero-dev/vite-plus-core@1.4.0
-  vitest: 5.0.5
+  vitest: 5.1.0
 
 # Peer ranges the PUBLISHED packages declare. A named catalog so strict mode
 # still governs them while they stay ranges; `pnpm publish` writes these
