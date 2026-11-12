@@ -88,7 +88,8 @@ with its final pass/fail:
    below; not a CI step).
 
 CI runs steps 1–5 in one job with a read-only token and no secrets, so Dependabot PRs run it safely. Every action is
-pinned to a commit SHA, checkout never persists credentials, and Node is `"*"` with `check-latest` (never `latest`,
+locked to its commit in `.github/workflows/actions.lock` (exact release tags in `uses:`; regenerate it with
+`gh actions-lock` after changing a workflow, and the `Lockfile` workflow runs `gh actions-lock --verify`), checkout never persists credentials, and Node is `"*"` with `check-latest` (never `latest`,
 which can resolve to a pre-release). `uvx zizmor --offline .github` audits the workflows (`.github/zizmor.yml`).
 
 ## Agent sessions

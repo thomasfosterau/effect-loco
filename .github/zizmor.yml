@@ -7,8 +7,3 @@ rules:
   dependabot-cooldown:
     config:
       days: 1
-  # `./.github/actions/setup` is the form every sibling repository and every
-  # GitHub runner understands; the newer `$/` self-repository syntax buys
-  # nothing for a local composite action called from this repository only.
-  self-repository:
-    disable: true
