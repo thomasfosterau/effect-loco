@@ -58,6 +58,6 @@ peerDependencyRules:
 onlyBuiltDependencies:
   - fallow
 
-minimumReleaseAge: 480
+minimumReleaseAge: 1440
 minimumReleaseAgeExclude:
   - "@thomasfosterau/*"
