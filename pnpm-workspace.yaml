@@ -9,16 +9,16 @@ catalog:
   "@changesets/changelog-github": ^1.0.1
   "@changesets/cli": ^3.0.3
   "@effect/language-service": ^0.87.5
-  "@effect/platform-node": 4.1.2
+  "@effect/platform-node": 4.1.4
   # Moves with `@typescript/native` and vite-plus's oxlint: read the
   # `components` table in node_modules/@effect/tsgo/dist/effect-tsgo.cjs first.
   "@effect/tsgo": 0.63.0
-  "@effect/vitest": 4.1.2
+  "@effect/vitest": 4.1.4
   "@enfect/oxlint": ^0.10.0
   "@types/node": ^26.6.6
   # Must equal vite-plus's vitest.
   "@vitest/coverage-istanbul": 5.0.5
-  effect: 4.1.2
+  effect: 4.1.4
   fallow: 3.43.2
   # TS6 for JS-API consumers (the language service, `vp pack`'s declarations);
   # TS7 (`@typescript/native`, bin `tsc`) type-checks and must match @effect/tsgo.
