@@ -40,6 +40,7 @@ Give it a `vite.config.ts` calling `packageConfig()` from `vite.package.ts`, a `
 
 - Use Effect idioms throughout, and prefer Effect v4's own modules (`Option`, `Array`, `Match`, `Schema`, …) to re-inventing them; convert existing code where practical. Exceptions: non-Effect APIs, adapted at the edge, and hot paths where a measurement shows plain code is needed. Non-idiomatic code you can't fix trivially gets an issue listing the sites and the replacement.
 - Read the installed `effect` package (`node_modules/effect/dist/*.d.ts`) rather than guessing at its API. Import modules by namespace from deep paths (`import * as Effect from "effect/Effect"`).
+- Exports follow Effect v4's layout: one PascalCase module per concept, re-exported as a namespace from `index.ts` (`export * as Component from "./Component.ts"`) and importable through its own subpath (`./Component`, served by the `./*` export). Private code goes in `internal/`.
 - `effect` is a peer of every published package (`^4.0.0` unless a dependency requires more), never a dependency: two copies break `Context` / `Schema` identity.
 - Component logic in the IR is limited to views, state and events; side effects are `Schema`-typed services the host app implements. Generated code is idiomatic for its framework, not a runtime shim.
 - The `codegen` packages stay generic: they never depend on or mention effect-loco.
