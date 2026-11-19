@@ -3,10 +3,7 @@
   "type": "module",
   "scripts": {
     "changeset": "changeset",
-    "changeset-version": "changeset version && vp fmt && pnpm install --lockfile-only",
-    "changeset-publish": "vp run build && changeset publish",
-    "fallow": "fallow --summary",
-    "fallow:audit": "fallow audit --base origin/trunk",
+    "release": "bash scripts/release.sh",
     "prepare": "vp config && effect-tsgo patch --typescript --oxlint"
   },
   "devDependencies": {
@@ -26,8 +23,11 @@
     "vite-plus": "catalog:",
     "vitest": "catalog:"
   },
-  "engines": {
-    "node": ">=22"
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "lts"
+    }
   },
   "packageManager": "pnpm@10.28.0"
 }

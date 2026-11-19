@@ -148,3 +148,6 @@ vite.config.ts.timestamp-*
 # Turbo Repo
 .turbo
 .vitest/
+
+# scripts/release.sh tarballs
+.release/
