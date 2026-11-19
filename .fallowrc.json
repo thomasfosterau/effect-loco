@@ -4,8 +4,8 @@
   "ignorePatterns": ["**/dist/**", "**/coverage/**"],
   "ignoreDependencies": [
     // Workspace dependencies the package scaffolds declare ahead of the code
-    // that imports them (the v0 roadmap, #3). Remove each name once every
-    // package that lists it imports it.
+    // that imports them. Remove each name once every package that lists it
+    // imports it.
     "@thomasfosterau/effect-codegen",
     "@thomasfosterau/effect-codegen-kotlin",
     "@thomasfosterau/effect-codegen-swift",

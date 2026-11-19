@@ -1,22 +1,12 @@
 /**
- * The Vite+ configuration every package in this workspace shares: its task
- * graph (`build`, `test:unit`), the `vp pack` (tsdown) settings and the
- * vitest settings. Each `packages/<name>/vite.config.ts` is a one-call
- * instantiation of it, and the root `vite.config.ts` lists those files as its
- * vitest projects.
- *
- * Development `exports` point at `src/` (`publishConfig.exports` swaps in
- * `dist/` at publish), so a package consumes its siblings from source: no task
- * here needs a sibling's build first.
+ * The Vite+ configuration every workspace package instantiates from its own
+ * `vite.config.ts`. Development `exports` point at `src/`, so no task needs a
+ * sibling's build first.
  */
 import { defineConfig } from "vite-plus"
 
-/**
- * Input fingerprint for the cached tasks: auto tracking minus node_modules
- * bookkeeping churn (pnpm rewrites `.modules.yaml` on every install), with the
- * lockfile back explicitly so a dependency upgrade still invalidates a cached
- * build or test run.
- */
+// Auto tracking minus node_modules churn (pnpm rewrites `.modules.yaml` on
+// every install), with the lockfile so an upgrade still invalidates the cache.
 const cacheInputs = [
   { auto: true },
   "!node_modules/**",
@@ -26,14 +16,12 @@ const cacheInputs = [
 
 const setupFile = new URL("./vitest.setup.ts", import.meta.url).pathname
 
-/** The shared configuration of one workspace package. */
 export const packageConfig = () =>
   defineConfig({
     run: {
       tasks: {
-        // The published artifact: one ESM module and declaration file per
-        // source module (`unbundle`), so `dist/` mirrors `src/` and the
-        // `./*` → `./dist/*.js` export map in `publishConfig` resolves.
+        // `unbundle`: `dist/` mirrors `src/`, so `publishConfig`'s
+        // `./*` → `./dist/*.js` export map resolves.
         build: {
           command: "vp pack",
           cache: { input: cacheInputs, output: ["dist/**"] }
@@ -57,8 +45,7 @@ export const packageConfig = () =>
       clean: true
     },
     resolve: {
-      // Tests import the package by its own name; the root tsconfig.json's
-      // `paths` map every workspace package to its `src/`.
+      // Tests import packages by name; the root tsconfig.json maps each to `src/`.
       tsconfigPaths: true
     },
     test: {
@@ -66,6 +53,8 @@ export const packageConfig = () =>
       sequence: {
         concurrent: true
       },
-      include: ["test/**/*.test.{ts,tsx}"]
+      include: ["test/**/*.test.{ts,tsx}"],
+      // The scaffolds have no tests yet.
+      passWithNoTests: true
     }
   })

@@ -1,38 +1,25 @@
-/**
- * Root workspace config. Owns the repo-wide format / lint / staged passes (read
- * statically by `vp fmt` / `vp lint` / `vp staged`), the root task aggregates
- * (`check`, `test:coverage`) and the vitest project list. Every package's own
- * tasks (`build`, `test:unit`) and its `vp pack` settings are defined once in
- * `vite.package.ts` and instantiated by each `packages/<name>/vite.config.ts`.
- */
 import { recommended } from "@effect/tsgo/oxlint-presets"
 import effect from "@enfect/oxlint"
 import { defineConfig } from "vite-plus"
 
-const ignored = ["**/dist/**", "**/build/**", "**/docs/**", "**/coverage/**", "**/*.tsbuildinfo"]
+const ignored = ["**/dist/**", "**/build/**", "**/coverage/**", "**/*.tsbuildinfo"]
 
 export default defineConfig({
-  // Staged-file checks run by `vp staged` (the pre-commit hook). Format with
-  // fixes, lint without: with type-aware lint on, `vp check --fix` would apply
-  // the autofixes of type-aware rules (even ones at `warn`) to staged files at
-  // commit time, so the commit would differ from the tree that was verified.
-  // `--no-error-on-unmatched-pattern` keeps a commit that stages only files
-  // the linter skips (Markdown, JSON) from failing the lint step.
+  // Format with fixes, lint without: a type-aware autofix at commit time would
+  // make the commit differ from the tree that was verified.
   staged: {
     "*.{js,ts,tsx,mjs,json,md,yaml,yml}": [
       "vp check --fix --no-lint",
       "vp check --no-fmt --no-error-on-unmatched-pattern"
     ]
   },
-  // The repo's established style (carried over from its dprint config): no
-  // semicolons, double quotes, no trailing commas, 120 columns.
   fmt: {
     semi: false,
     singleQuote: false,
     trailingComma: "none",
     printWidth: 120,
     arrowParens: "always",
-    ignorePatterns: [...ignored, "packages/**/CHANGELOG.md", "pnpm-lock.yaml"],
+    ignorePatterns: [...ignored, "**/CHANGELOG.md", "pnpm-lock.yaml"],
     overrides: [
       {
         files: ["**/*.md"],
@@ -44,9 +31,6 @@ export default defineConfig({
   },
   lint: {
     ignorePatterns: [...ignored, "**/node_modules/**"],
-    // `@effect/tsgo`'s preset (the `effecttsgo/*` rules, run by the patched
-    // oxlint) and `@enfect/oxlint`'s `recommended` Effect rules. Every
-    // `effect/*` rule stays at the preset's `error`, with no override.
     extends: [recommended, effect.configs.recommended],
     plugins: ["eslint", "typescript", "unicorn", "oxc", "import", "promise", "vitest", "jsdoc"],
     categories: {
@@ -59,7 +43,6 @@ export default defineConfig({
       "import/no-cycle": "error",
       "typescript/consistent-type-imports": "error",
       "typescript/no-explicit-any": "off",
-      // Every export documents `@since` and `@category` (AGENTS.md).
       "jsdoc/check-tag-names": ["error", { definedTags: ["since", "category"] }],
       // `_tag` is the discriminant of every Effect tagged value and error.
       "eslint/no-underscore-dangle": ["error", { allow: ["_tag"] }],
@@ -82,13 +65,8 @@ export default defineConfig({
         }
       }
     ],
-    // Type-aware linting through oxlint-tsgolint (bundled with Vite+, patched
-    // by `effect-tsgo patch --oxlint`): `typeAware` turns on the rules that
-    // need type information, `typeCheck` reports TypeScript diagnostics in
-    // `vp check` too. The `check` task (the native, Effect-patched `tsc -b`)
-    // stays the type gate of record. tsgolint types a file with its nearest
-    // `tsconfig.json`, so each package's `test/tsconfig.json` (extending the
-    // root one) is what gives the suites the root `paths`.
+    // tsgolint types a file with its nearest tsconfig.json, so each package's
+    // `test/tsconfig.json` extends the root one to get its `paths`.
     options: {
       typeAware: true,
       typeCheck: true
@@ -102,21 +80,36 @@ export default defineConfig({
   },
   run: {
     tasks: {
-      // The type gate: every package's `src` (tsconfig.packages.json's project
-      // references) plus the suites and configs (tsconfig.json), under the
-      // native, Effect-patched `tsc`.
+      // The whole gate, in CI's order, stopping at the first failure.
+      ci: {
+        command: "vp check && vp run check && vp run -r test:unit && vp run -r build && pnpm audit --audit-level high",
+        cache: false
+      },
+      // The type gate: every package's `src` (project references) plus the
+      // suites and configs, under the Effect-patched native `tsc`.
       check: {
         command: "tsc -b tsconfig.json",
         cache: false
       },
-      // Every package's suite under one Istanbul coverage map
-      // (`coverage/coverage-final.json`), which `fallow audit` reads for exact
-      // per-function CRAP scores (`health.coverage` in .fallowrc.json).
-      // Without it fallow scores every function as uncovered. Run this before
-      // `fallow audit` (the PreToolUse fallow gate runs the audit on
-      // `git commit` / `git push` but never refreshes this map).
+      // Writes coverage/coverage-final.json, which `fallow audit` reads for
+      // CRAP scores.
       "test:coverage": {
         command: "vp test run --coverage",
+        cache: false
+      },
+      // Run by the pre-commit hook after `vp staged`.
+      "fallow:audit": {
+        command: "vp exec fallow audit --base origin/trunk --quiet",
+        dependsOn: ["test:coverage"],
+        cache: false
+      },
+      fallow: {
+        command: "vp exec fallow --summary",
+        cache: false
+      },
+      // Run by the Release workflow's version job.
+      "changeset:version": {
+        command: "changeset version && vp fmt && pnpm install --lockfile-only",
         cache: false
       }
     }
@@ -124,9 +117,9 @@ export default defineConfig({
   test: {
     // Each package's own vite.config.ts is a vitest project.
     projects: ["packages/*/vite.config.ts"],
+    passWithNoTests: true,
     coverage: {
       provider: "istanbul",
-      // `json` writes coverage-final.json (see `test:coverage` above).
       reporter: ["text-summary", "json-summary", "json", "html"],
       reportsDirectory: "./coverage",
       include: ["packages/*/src/**/*.ts"],
