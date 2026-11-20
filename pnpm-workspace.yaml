@@ -19,7 +19,7 @@ catalog:
   # Must equal vite-plus's vitest.
   "@vitest/coverage-istanbul": 5.0.5
   effect: 4.1.4
-  fallow: 3.43.2
+  fallow: 3.44.0
   # TS6 for JS-API consumers (the language service, `vp pack`'s declarations);
   # TS7 (`@typescript/native`, bin `tsc`) type-checks and must match @effect/tsgo.
   typescript: "npm:@typescript/typescript6@6.0.2"
