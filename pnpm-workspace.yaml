@@ -2,7 +2,7 @@ packages:
   - packages/*
 
 # Every external version lives here (`catalogMode: strict`). After editing it,
-# run `pnpm install` and commit pnpm-lock.yaml.
+# run `vp install` and commit pnpm-lock.yaml.
 catalogMode: strict
 
 catalog:
@@ -55,8 +55,19 @@ peerDependencyRules:
     vitest: "*"
 
 # `fallow` fetches its native binary in a postinstall step.
-onlyBuiltDependencies:
-  - fallow
+allowBuilds:
+  fallow: true
+
+# Agent skills dependencies ship (pnpm 12.11+). `fallow` ships `fallow` and
+# `fallow-setup`; only `fallow` is linked, since the repository is already set
+# up. Build grants stay in `allowBuilds`: a `permissions` entry without `build`
+# leaves its package's `allowBuilds` grant in force.
+permissions:
+  fallow:
+    skills: [fallow]
+
+skills:
+  dirs: [.claude/skills]
 
 minimumReleaseAge: 1440
 minimumReleaseAgeExclude:

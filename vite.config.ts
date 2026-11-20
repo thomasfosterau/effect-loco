@@ -4,6 +4,21 @@ import { defineConfig } from "vite-plus"
 
 const ignored = ["**/dist/**", "**/build/**", "**/coverage/**", "**/*.tsbuildinfo"]
 
+// Every package's `dist/`, which the release publishes.
+const buildAll = [
+  "codegen",
+  "codegen-kotlin",
+  "codegen-swift",
+  "codegen-typescript",
+  "loco",
+  "loco-cli",
+  "loco-compose",
+  "loco-react",
+  "loco-svelte",
+  "loco-swiftui",
+  "loco-uikit"
+].map((name) => `@thomasfosterau/effect-${name}#build`)
+
 export default defineConfig({
   // Format with fixes, lint without: a type-aware autofix at commit time would
   // make the commit differ from the tree that was verified.
@@ -109,7 +124,24 @@ export default defineConfig({
       },
       // Run by the Release workflow's version job.
       "changeset:version": {
-        command: "changeset version && vp fmt && pnpm install --lockfile-only",
+        command: "changeset version && vp fmt && vp install --lockfile-only",
+        cache: false
+      },
+      // The Release workflow's publish script, after every package's build:
+      // pnpm publishes each public package whose version is not on npm yet, in
+      // dependency order, under OIDC trusted publishing; then `changeset
+      // git-tag` tags each version not tagged yet and reports the new tags to
+      // `changesets/action` through `CHANGESETS_OUTPUT`, which pushes them and
+      // creates the GitHub releases. A failed publish stops before tagging.
+      release: {
+        command: ["vp pm publish -r --access public --no-git-checks -- --ignore-scripts", "changeset git-tag"],
+        dependsOn: buildAll,
+        cache: false
+      },
+      // What `release` would publish, without publishing or tagging.
+      "release:dry-run": {
+        command: "vp pm publish -r --access public --dry-run --no-git-checks -- --ignore-scripts",
+        dependsOn: buildAll,
         cache: false
       }
     }

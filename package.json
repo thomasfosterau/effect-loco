@@ -3,7 +3,6 @@
   "type": "module",
   "scripts": {
     "changeset": "changeset",
-    "release": "bash scripts/release.sh",
     "prepare": "vp config && effect-tsgo patch --typescript --oxlint"
   },
   "devDependencies": {
@@ -29,5 +28,5 @@
       "version": "lts"
     }
   },
-  "packageManager": "pnpm@10.28.0"
+  "packageManager": "pnpm@12.21.0"
 }
