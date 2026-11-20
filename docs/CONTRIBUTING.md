@@ -63,4 +63,4 @@ Run `vp run ci` (format, lint, type gate, tests, build, `pnpm audit`). The pre-c
 
 ## Changesets
 
-Every change to a published package's behaviour or its emitted `.d.ts` (doc comments included, as a `patch`) needs a changeset: run `pnpm changeset` and commit the file with the change. Docs, CI and tooling changes need none. While pre-1.0, a breaking change is a `minor`. The `effect-loco` packages version together. Never version or publish by hand: see [PUBLISHING.md](PUBLISHING.md).
+Every change to a published package's behaviour or its emitted `.d.ts` (doc comments included, as a `patch`) needs a changeset: run `pnpm changeset` and commit the file with the change. Docs, CI and tooling changes need none. While pre-1.0, a breaking change is a `minor`. The `effect-loco` packages version together. Never version or publish by hand: the Release workflow runs `vp run release` (`vp run release:dry-run` shows what it would publish); see [PUBLISHING.md](PUBLISHING.md).

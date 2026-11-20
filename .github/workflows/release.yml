@@ -123,11 +123,11 @@ jobs:
           cache: false
           run-install: |
             - args: ['--frozen-lockfile', '--ignore-scripts']
-      - run: vp run -r build
-      # `pnpm publish` does the OIDC exchange and adds provenance itself, and
-      # skips a version npm already has, so a re-run is safe.
+      # `vp run release` (vite.config.ts): builds every package, then
+      # `vp pm publish -r` (pnpm, which does the OIDC exchange and adds
+      # provenance itself, and skips a version npm already has, so a re-run is
+      # safe), then `changeset git-tag` reports the new tags through
+      # CHANGESETS_OUTPUT, and the action pushes them and creates the releases.
       - uses: changesets/action/publish@v2.1.2
         with:
-          script: pnpm run release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          script: vp run release
