@@ -7,3 +7,7 @@ Read [README.md](README.md) and [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) fir
 - Write idiomatic Effect v4 (see docs/CONTRIBUTING.md); non-idiomatic code that isn't a trivial fix gets an issue listing the sites and the replacement.
 - The `codegen-<language>` packages must never depend on or mention effect-loco; `.fallowrc.json`'s boundaries enforce the imports, review enforces the wording.
 - `vp check` and `vp run check` are different commands: format + lint, and the type gate.
+
+## Fallow
+
+- `vp install` links the `fallow` skill into `.claude/skills/fallow` from the installed package (approved under `permissions` in `pnpm-workspace.yaml`). The pre-commit `fallow:audit` gate and the rest of the repository's rules are in [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md).
