@@ -149,8 +149,5 @@ vite.config.ts.timestamp-*
 .turbo
 .vitest/
 
-# scripts/release.sh tarballs
-.release/
-
 # Agent worktrees
 .claude/worktrees/

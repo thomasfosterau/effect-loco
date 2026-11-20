@@ -18,11 +18,22 @@ permissions: {}
 
 jobs:
   ci:
-    name: CI
+    name: CI (node ${{ matrix.node }})
     runs-on: ubuntu-latest
     timeout-minutes: 20
     permissions:
       contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        # The published packages must work on both.
+        node: [lts, latest]
+        include:
+          - node: lts
+            node-version: lts
+          # setup-vp's `latest` can resolve to a pre-release; `*` cannot.
+          - node: latest
+            node-version: "*"
     env:
       # Inherited by every child process, each vitest fork included.
       NODE_OPTIONS: --max-old-space-size=2048
@@ -33,7 +44,7 @@ jobs:
       - uses: voidzero-dev/setup-vp@v1.22.0
         with:
           version-file: pnpm-workspace.yaml
-          node-version: lts
+          node-version: ${{ matrix.node-version }}
           cache: true
           run-install: true
       # Vite+ has no remote task cache: the prefix restores the newest entry
@@ -42,9 +53,9 @@ jobs:
         uses: actions/cache@v6.1.0
         with:
           path: node_modules/.vite/task-cache
-          key: vp-task-v2-${{ runner.os }}-${{ github.sha }}
+          key: vp-task-v2-${{ runner.os }}-${{ matrix.node }}-${{ github.sha }}
           restore-keys: |
-            vp-task-v2-${{ runner.os }}-
+            vp-task-v2-${{ runner.os }}-${{ matrix.node }}-
       - name: CI
         run: vp run ci
 

@@ -2,7 +2,7 @@ packages:
   - packages/*
 
 # Every external version lives here (`catalogMode: strict`). After editing it,
-# run `pnpm install` and commit pnpm-lock.yaml.
+# run `vp install` and commit pnpm-lock.yaml.
 catalogMode: strict
 
 catalog:
@@ -55,8 +55,8 @@ peerDependencyRules:
     vitest: "*"
 
 # `fallow` fetches its native binary in a postinstall step.
-onlyBuiltDependencies:
-  - fallow
+allowBuilds:
+  fallow: true
 
 minimumReleaseAge: 1440
 minimumReleaseAgeExclude:

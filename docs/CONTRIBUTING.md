@@ -30,7 +30,6 @@ Every version lives in the `pnpm-workspace.yaml` catalog; `package.json` files u
 
 - `vite` (an npm alias) equals `vite-plus`; `vitest` and `@vitest/coverage-istanbul` equal the vitest vite-plus pins. The devcontainer image tag equals `vite-plus` too.
 - `@effect/tsgo`, `@typescript/native` (an npm alias) and vite-plus's oxlint must be a combination the `components` table in `node_modules/@effect/tsgo/dist/effect-tsgo.cjs` supports, or `vp install` fails.
-- The `npm` version in `release.yml`.
 
 ### Adding a package
 
