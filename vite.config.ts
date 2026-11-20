@@ -80,11 +80,13 @@ export default defineConfig({
         }
       }
     ],
-    // tsgolint types a file with its nearest tsconfig.json, so each package's
-    // `test/tsconfig.json` extends the root one to get its `paths`.
+    // tsrs types a file with its nearest tsconfig.json, so each package's
+    // `test/tsconfig.json` extends the root one to get its `paths`. No
+    // `typeCheck`: tsrs's type check reports the Effect language service's
+    // warnings, which the `effecttsgo/*` rules already report, as errors.
+    // `vp run check` stays the type gate.
     options: {
-      typeAware: true,
-      typeCheck: true
+      typeAware: true
     },
     jsPlugins: [
       {
