@@ -1,6 +1,6 @@
 {
   "name": "@thomasfosterau/effect-codegen-typescript",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "An Effect-based TypeScript/JavaScript AST and printer for code generation (including JSX/TSX).",
   "bugs": {
     "url": "https://github.com/thomasfosterau/effect-loco/issues"

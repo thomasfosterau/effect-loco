@@ -1,6 +1,6 @@
 {
   "name": "@thomasfosterau/effect-loco-react",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "effect-loco target that emits React components.",
   "bugs": {
     "url": "https://github.com/thomasfosterau/effect-loco/issues"
