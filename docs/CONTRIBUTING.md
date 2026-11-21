@@ -26,7 +26,7 @@ The pre-commit hook runs `vp staged` (format and lint the staged files) and then
 
 ### Dependencies
 
-Every version lives in the `pnpm-workspace.yaml` catalog; `package.json` files use `catalog:`, `catalog:peers` or `workspace:^` only. After editing the catalog, run `vp install` and commit `pnpm-lock.yaml`. Dependabot can't do these, so do them on its PR:
+Every version lives in the `pnpm-workspace.yaml` catalog; `package.json` files use `catalog:`, `catalog:peers` or `workspace:^` only. After editing the catalog, run `vp install` and commit `pnpm-lock.yaml`. Dependabot can't do these, so make them in a PR from a new branch started from its head (never push to a `dependabot/*` branch, which stops it rebasing), and it closes its own PR once yours merges:
 
 - `vite` (an npm alias) equals `vite-plus`; `vitest` and `@vitest/coverage-istanbul` equal the vitest vite-plus pins. The devcontainer image tag equals `vite-plus` too.
 - `@effect/tsgo`, `@typescript/native` (an npm alias) and vite-plus's oxlint must be a combination the `components` table in `node_modules/@effect/tsgo/dist/effect-tsgo.cjs` supports, or `vp install` fails.
