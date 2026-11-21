@@ -10,24 +10,25 @@ catalog:
   "@changesets/cli": ^3.0.3
   "@effect/language-service": ^0.87.5
   "@effect/platform-node": 4.1.4
-  # Moves with `@typescript/native` and vite-plus's oxlint: read the
+  # Moves with `@typescript/native` and vite-plus's oxlint and tsrs: read the
   # `components` table in node_modules/@effect/tsgo/dist/effect-tsgo.cjs first.
-  "@effect/tsgo": 0.63.0
+  "@effect/tsgo": 0.73.2
   "@effect/vitest": 4.1.4
   "@enfect/oxlint": ^0.10.0
   "@types/node": ^26.6.6
   # Must equal vite-plus's vitest.
-  "@vitest/coverage-istanbul": 5.0.5
+  "@vitest/coverage-istanbul": 5.1.0
   effect: 4.1.4
   fallow: 3.44.0
   # TS6 for JS-API consumers (the language service, `vp pack`'s declarations);
   # TS7 (`@typescript/native`, bin `tsc`) type-checks and must match @effect/tsgo.
   typescript: "npm:@typescript/typescript6@6.0.2"
   "@typescript/native": "npm:typescript@7.0.2"
-  # `vite` and `vitest` follow vite-plus: move them by hand with it.
-  vite-plus: 1.4.0
-  vite: npm:@voidzero-dev/vite-plus-core@1.4.0
-  vitest: 5.0.5
+  # `vite` and `vitest` equal what vite-plus itself depends on (`npm view
+  # vite-plus@<v> dependencies`); `vite` no longer equals vite-plus.
+  vite-plus: 1.7.0
+  vite: npm:@voidzero-dev/vite-plus-core@8.3.8000
+  vitest: 5.1.0
 
 # Published peer ranges. `effect` is `^4.0.0` unless a package's own
 # dependency needs more; raising a floor is a breaking change.
@@ -45,14 +46,6 @@ overrides:
   effect: "catalog:"
   "vite@*": "catalog:"
   "vitest@*": "catalog:"
-
-peerDependencyRules:
-  allowAny:
-    - vite
-    - vitest
-  allowedVersions:
-    vite: "*"
-    vitest: "*"
 
 # `fallow` fetches its native binary in a postinstall step.
 allowBuilds:

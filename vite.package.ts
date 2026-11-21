@@ -42,7 +42,13 @@ export const packageConfig = () =>
       dts: true,
       sourcemap: true,
       outDir: "dist",
-      clean: true
+      clean: true,
+      deps: {
+        // tsdown <0.23 compatibility: resolve external dependency subpaths.
+        // Remove to preserve subpath imports as written (the new default).
+        // https://tsdown.dev/options/dependencies#deps-resolvedepsubpath
+        resolveDepSubpath: true
+      }
     },
     resolve: {
       // Tests import packages by name; the root tsconfig.json maps each to `src/`.
