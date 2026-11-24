@@ -12,12 +12,12 @@ catalog:
   "@effect/platform-node": 4.1.4
   # Moves with `@typescript/native` and vite-plus's oxlint and tsrs: read the
   # `components` table in node_modules/@effect/tsgo/dist/effect-tsgo.cjs first.
-  "@effect/tsgo": 0.73.2
+  "@effect/tsgo": 0.73.4
   "@effect/vitest": 4.1.4
   "@enfect/oxlint": ^0.10.0
   "@types/node": ^26.6.6
   # Must equal vite-plus's vitest.
-  "@vitest/coverage-istanbul": 5.1.0
+  "@vitest/coverage-istanbul": 5.1.1
   effect: 4.1.4
   fallow: 3.44.0
   # TS6 for JS-API consumers (the language service, `vp pack`'s declarations);
@@ -28,7 +28,7 @@ catalog:
   # vite-plus@<v> dependencies`); `vite` no longer equals vite-plus.
   vite-plus: 1.7.0
   vite: npm:@voidzero-dev/vite-plus-core@8.3.8000
-  vitest: 5.1.0
+  vitest: 5.1.1
 
 # Published peer ranges. `effect` is `^4.0.0` unless a package's own
 # dependency needs more; raising a floor is a breaking change.
