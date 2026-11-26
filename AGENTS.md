@@ -7,7 +7,7 @@ Read [README.md](README.md) and [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) fir
 - Write idiomatic Effect v4 (see docs/CONTRIBUTING.md); non-idiomatic code that isn't a trivial fix gets an issue listing the sites and the replacement.
 - The `codegen-<language>` packages must never depend on or mention effect-loco; `.fallowrc.json`'s boundaries enforce the imports, review enforces the wording.
 - `vp check` and `vp run check` are different commands: format + lint, and the type gate.
-- Publish only through the Release workflow (`vp run release`; there is no publish script). Release-path registry calls go through `vp pm`, never `npm` / `pnpm` directly; `vp pm view` fails inside this repo (`devEngines.runtime` is `lts`), so rely on `vp pm publish -r` skipping published versions.
+- Publish only through the Release workflow (`vp run release`; there is no publish script). Release-path registry calls go through `vp pm`, never `npm` / `pnpm` directly; rely on `vp pm publish -r` skipping published versions.
 
 ## Fallow
 
