@@ -1,6 +1,6 @@
 {
   "name": "@thomasfosterau/effect-loco-swiftui",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "effect-loco target that emits SwiftUI views.",
   "bugs": {
     "url": "https://github.com/thomasfosterau/effect-loco/issues"

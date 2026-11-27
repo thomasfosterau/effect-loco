@@ -1,6 +1,6 @@
 {
   "name": "@thomasfosterau/effect-loco-cli",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "The effect-loco command line interface: loads component modules and emits code for configured targets.",
   "bugs": {
     "url": "https://github.com/thomasfosterau/effect-loco/issues"

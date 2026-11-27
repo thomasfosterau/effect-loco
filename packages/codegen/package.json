@@ -1,6 +1,6 @@
 {
   "name": "@thomasfosterau/effect-codegen",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Language-agnostic code generation primitives for Effect: documents, pretty-printing and file emission.",
   "bugs": {
     "url": "https://github.com/thomasfosterau/effect-loco/issues"

@@ -1,6 +1,6 @@
 {
   "name": "@thomasfosterau/effect-loco-uikit",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "effect-loco target that emits UIKit view controllers and views.",
   "bugs": {
     "url": "https://github.com/thomasfosterau/effect-loco/issues"
